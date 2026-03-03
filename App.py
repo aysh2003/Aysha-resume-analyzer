@@ -128,9 +128,14 @@ def run():
         if pdf_file is not None:
             # with st.spinner('Uploading your Resume....'):
             #     time.sleep(4)
-            save_image_path = './Uploaded_Resumes/' + pdf_file.name
-            with open(save_image_path, "wb") as f:
-                f.write(pdf_file.getbuffer())
+            import os
+
+            folder = "Uploaded_Resumes"
+            os.makedirs(folder, exist_ok=True)  # ensure folder exists
+
+            save_path = os.path.join(folder, pdf_file.name)
+            with open(save_path, "wb") as f:
+               f.write(pdf_file.getbuffer())
             show_pdf(save_image_path)
             resume_data = ResumeParser(save_image_path).get_extracted_data()
             if resume_data:
