@@ -167,7 +167,7 @@ def run():
                nlp = spacy.load("en_core_web_sm")
 
 # Patch pyresparser to use this loaded model
-            rp.custom_nlp = nlpd resume
+            rp.custom_nlp = nlp
             resume_data = ResumeParser(save_path).get_extracted_data()
             if resume_data:
                 ## Get the whole resume data
