@@ -406,13 +406,3 @@ def run():
 
 
 run()
-import pymysql
-
-connection = pymysql.connect(
-    host='localhost',
-    user='root',
-    password='',       # default XAMPP password is empty
-    database='resume_db'  # replace with your DB name
-)
-
-print("Connected to MySQL!")
