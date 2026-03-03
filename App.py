@@ -1,22 +1,31 @@
 import streamlit as st
 import nltk
-nltk.download('stopwords')
-nltk.download('punkt')
 import spacy
 from pyresparser import ResumeParser
 
-# Safe patch: make PyResparser use the correct SpaCy model
-import spacy
+# Download NLTK only if not already downloaded
+try:
+    nltk.data.find('corpora/stopwords')
+except LookupError:
+    nltk.download('stopwords')
 
+try:
+    nltk.data.find('tokenizers/punkt')
+except LookupError:
+    nltk.download('punkt')
 
+# Load spaCy model properly
 nlp = spacy.load("en_core_web_sm")
+
+# Force pyresparser to use this model
 import pyresparser.resume_parser as rp
 rp.custom_nlp = nlp
-nltk.download('stopwords')
-spacy.load('en_core_web_sm')
+
 import pandas as pd
-import base64, random
-import time, datetime
+import base64
+import random
+import time
+import datetime
 from pyresparser import ResumeParser
 from pdfminer.layout import LAParams, LTTextBox
 from pdfminer.pdfpage import PDFPage
