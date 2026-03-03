@@ -152,7 +152,7 @@ def run():
 
     # Now you can safely parse the resume
           resume_data = ResumeParser(temp_path, spacy_model="en_core_web_sm").get_extracted_data()
-            if resume_data:
+       if resume_data:
                 ## Get the whole resume data
                 resume_text = pdf_reader(save_image_path)
 
