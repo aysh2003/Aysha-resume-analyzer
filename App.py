@@ -10,7 +10,7 @@ nltk.data.path.append(nltk_data_dir)
 nltk.download('stopwords', download_dir=nltk_data_dir)
 
 # After this, import modules that depend on stopwords
-from resume_parser import resumeparse
+
 
 # Safe patch: make PyResparser use the correct SpaCy model
 import pandas as pd
