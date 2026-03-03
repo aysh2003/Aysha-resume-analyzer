@@ -1,13 +1,9 @@
 streamlit==1.33.0
-spacy==3.7.2
-numpy==1.26.4
-resume-parser
-pandas
 pdfminer.six
 nltk==3.8.1
-streamlit-tags
 pymysql
-PyMuPDF
+streamlit-tags
+pandas
 Pillow
 plotly
-en_core_web_sm @ https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1-py3-none-any.whl
+PyMuPDF
