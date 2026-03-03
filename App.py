@@ -154,7 +154,20 @@ def run():
                img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
                st.image(img, caption=f"Page {page_number+1}", use_column_width=True)
 
-# Parse the saved resume
+# Parse the saveimport spacy
+            import pyresparser.resume_parser as rp
+
+            try:
+    # Try loading the installed spaCy model
+               nlp = spacy.load("en_core_web_sm")
+            except OSError:
+    # If not found, download it at runtime
+               import subprocess
+               subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
+               nlp = spacy.load("en_core_web_sm")
+
+# Patch pyresparser to use this loaded model
+            rp.custom_nlp = nlpd resume
             resume_data = ResumeParser(save_path).get_extracted_data()
             if resume_data:
                 ## Get the whole resume data
