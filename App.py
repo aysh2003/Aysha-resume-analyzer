@@ -141,18 +141,18 @@ def run():
                f.write(pdf_file.getbuffer())
 
 # Display PDF using base64 iframe
-            with open(save_path, "rb") as pdf:
-               base64_pdf = base64.b64encode(pdf.read()).decode("utf-8")
+            import fitz  # PyMuPDF
+            from PIL import Image
 
-            pdf_display =f'''
-              <iframe
-                 src="data:application/pdf;base64,{base64_pdf}"
-                 width="700" height="1000"
-                 style="border:none;"
-                 type="application/pdf"
-              ></iframe>
-            '''
-            st.markdown(pdf_display, unsafe_allow_html=True)
+# Convert each page of the PDF to images
+            doc = fitz.open(save_path)
+
+# Loop through all pages and display
+            for page_number in range(len(doc)):
+               page = doc.load_page(page_number)
+               pix = page.get_pixmap()
+               img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
+               st.image(img, caption=f"Page {page_number+1}", use_column_width=True)
 
 # Parse the saved resume
             resume_data = ResumeParser(save_path).get_extracted_data()
