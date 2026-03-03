@@ -181,29 +181,27 @@ def run():
 
 # Simple parsing
                resume_data = simple_parse(resume_text)
-            
 
 # display the parsed info
-                 st.text("Name: " + resume_data.get("name", ""))
-                 st.text("Email: " + resume_data.get("email", ""))
-                 st.text("Phone: " + resume_data.get("phone", ""))
-                 st.text("Skills: " + ", ".join(resume_data.get("skills", [])))
-            if resume_data:
-                ## Get the whole resume data
-                from pdfminer.high_level import extract_text
+               st.text("Name: " + resume_data.get("name", ""))
+               st.text("Email: " + resume_data.get("email", ""))
+               st.text("Phone: " + resume_data.get("phone", ""))
+               st.text("Skills: " + ", ".join(resume_data.get("skills", [])))
+               if resume_data:
+                   from pdfminer.high_level import extract_text
 
-                resume_text = extract_text(save_image_path)
+                   resume_text = extract_text(save_image_path)
 
-                st.header("**Resume Analysis**")
-                st.success("Hello " + resume_data['name'])
-                st.subheader("**Your Basic info**")
-                try:
-                    st.text('Name: ' + resume_data['name'])
-                    st.text('Email: ' + resume_data['email'])
-                    st.text('Contact: ' + resume_data['mobile_number'])
-                    st.text('Resume pages: ' + str(resume_data['no_of_pages']))
-                except:
-                    pass
+                   st.header("**Resume Analysis**")
+                   st.success("Hello " + resume_data['name'])
+                   st.subheader("**Your Basic info**")
+                   try:
+                      st.text('Name: ' + resume_data['name'])
+                      st.text('Email: ' + resume_data['email'])
+                      st.text('Contact: ' + resume_data['mobile_number'])
+                      st.text('Resume pages: ' + str(resume_data['no_of_pages']))
+                  except:
+                      pass
                 cand_level = ''
                 if resume_data['no_of_pages'] == 1:
                     cand_level = "Fresher"
