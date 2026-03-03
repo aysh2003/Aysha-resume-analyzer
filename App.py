@@ -142,12 +142,9 @@ def run():
         #             unsafe_allow_html=True)
         pdf_file = st.file_uploader("Choose your Resume", type=["pdf"])
         if pdf_file is not None:
-            # with st.spinner('Uploading your Resume....'):
-            #     time.sleep(4)
-            import os
-            os.makedirs("Uploaded_Resumes", exist_ok=True)
-            import tempfile
-            pdf_file = st.file_uploader("Choose your Resume", type=["pdf"])
+             import os
+             os.makedirs("Uploaded_Resumes", exist_ok=True)
+             import tempfile
         if pdf_file is not None:
     # Save resume to a temporary file
             with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
