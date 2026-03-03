@@ -120,6 +120,8 @@ def run():
         if pdf_file is not None:
             # with st.spinner('Uploading your Resume....'):
             #     time.sleep(4)
+            import os
+            os.makedirs("Uploaded_Resumes", exist_ok=True)
             save_image_path = './Uploaded_Resumes/' + pdf_file.name
             with open(save_image_path, "wb") as f:
                 f.write(pdf_file.getbuffer())
