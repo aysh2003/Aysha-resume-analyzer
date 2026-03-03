@@ -26,7 +26,6 @@ from pdfminer.converter import TextConverter
 import io, random
 from streamlit_tags import st_tags
 from PIL import Image
-import pymysql
 from Courses import ds_course, web_course, android_course, ios_course, uiux_course, resume_videos, interview_videos
 import plotly.express as px
 
@@ -86,10 +85,6 @@ def course_recommender(course_list):
     return rec_course
 
 
-connection = pymysql.connect(host='localhost', user='root', password='')
-cursor = connection.cursor()
-
-
 def insert_data(name, email, res_score, timestamp, no_of_pages, reco_field, cand_level, skills, recommended_skills,
                 courses):
     DB_table_name = 'user_data'
@@ -119,28 +114,7 @@ def run():
     img = img.resize((250, 250))
     st.image(img)
 
-    # Create the DB
-    db_sql = """CREATE DATABASE IF NOT EXISTS SRA;"""
-    cursor.execute(db_sql)
-    connection.select_db("sra")
-
-    # Create table
-    DB_table_name = 'user_data'
-    table_sql = "CREATE TABLE IF NOT EXISTS " + DB_table_name + """
-                    (ID INT NOT NULL AUTO_INCREMENT,
-                     Name varchar(100) NOT NULL,
-                     Email_ID VARCHAR(50) NOT NULL,
-                     resume_score VARCHAR(8) NOT NULL,
-                     Timestamp VARCHAR(50) NOT NULL,
-                     Page_no VARCHAR(5) NOT NULL,
-                     Predicted_Field VARCHAR(25) NOT NULL,
-                     User_level VARCHAR(30) NOT NULL,
-                     Actual_skills VARCHAR(300) NOT NULL,
-                     Recommended_skills VARCHAR(300) NOT NULL,
-                     Recommended_courses VARCHAR(600) NOT NULL,
-                     PRIMARY KEY (ID));
-                    """
-    cursor.execute(table_sql)
+    
     if choice == 'User':
         # st.markdown('''<h4 style='text-align: left; color: #d73b5c;'>* Upload your resume, and get smart recommendation based on it."</h4>''',
         #             unsafe_allow_html=True)
@@ -378,7 +352,7 @@ def run():
 
                
 
-                connection.commit()
+            
             else:
                 st.error('Something went wrong..')
     else:
@@ -426,13 +400,3 @@ def run():
 
 
 run()
-import pymysql
-
-connection = pymysql.connect(
-    host='localhost',
-    user='root',
-    password='',       # default XAMPP password is empty
-    database='resume_db'  # replace with your DB name
-)
-
-print("Connected to MySQL!")
