@@ -16,14 +16,41 @@ from resume_parser import resumeparse
 import pandas as pd
 import base64, random
 import time, datetime
-from resume_parser import resumeparse
 from pdfminer.high_level import extract_text
 import io, random
 from streamlit_tags import st_tags
 from PIL import Image
 from Courses import ds_course, web_course, android_course, ios_course, uiux_course, resume_videos, interview_videos
 import plotly.express as px
+import re
 
+def simple_parse(text):
+    data = {}
+
+    # emails
+    emails = re.findall(r"[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+", text)
+    data["email"] = emails[0] if emails else ""
+
+    # phone numbers
+    phones = re.findall(r"\+?\d[\d\-\s]{8,}\d", text)
+    data["phone"] = phones[0] if phones else ""
+
+    # name guess — take the first non‑empty line
+    lines = [l.strip() for l in text.split("\n") if l.strip()]
+    data["name"] = lines[0] if lines else ""
+
+    # skill matching (basic list)
+    key_skills = ["python","javascript","java","sql","html","css",
+                  "machine learning","deep learning","react",
+                  "django","node","flask"]
+    found_skills = []
+    lowered = text.lower()
+    for skill in key_skills:
+        if skill.lower() in lowered:
+            found_skills.append(skill)
+    data["skills"] = list(set(found_skills))
+
+    return data
 
 
 def get_table_download_link(df, filename, text):
@@ -124,7 +151,6 @@ def run():
             #     time.sleep(4)
             import os
             import base64
-            from resume_parser import resumeparse
 
 # Create folder and save uploaded resume
             folder = "Uploaded_Resumes"
@@ -149,8 +175,11 @@ def run():
                st.image(img, caption=f"Page {page_number+1}", use_column_width=True)
 
 # Parse the saveimport spacy
-            from resume_parser import resumeparse
-            resume_data = resumeparse.read_file(save_path)
+            # Read text from PDF
+               resume_text = pdf_reader(save_path)
+
+# Simple parsing
+               resume_data = simple_parse(resume_text)
             if resume_data:
                 ## Get the whole resume data
                 resume_text = pdf_reader(save_image_path)
