@@ -1,5 +1,15 @@
 import streamlit as st
-import nltk
+import os, nltk
+
+# Ensure nltk data is saved locally in project folder
+nltk_data_dir = os.path.join(os.getcwd(), "nltk_data")
+os.makedirs(nltk_data_dir, exist_ok=True)
+nltk.data.path.append(nltk_data_dir)
+
+# Download required NLTK datasets
+nltk.download('stopwords', download_dir=nltk_data_dir)
+
+# After this, import modules that depend on stopwords
 import spacy
 from pyresparser import ResumeParser
 
