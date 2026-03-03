@@ -216,7 +216,7 @@ def run():
                     st.markdown('''<h4 style='text-align: left; color: #fba171;'>You are at experience level!''',
                                 unsafe_allow_html=True)
 
-                st.subheader("**Skills Recommendation💡**")
+            st.subheader("**Skills Recommendation💡**")
                 ## Skill shows
                 keywords = st_tags(label='### Skills that you have',
                                    text='See our skills recommendation',
