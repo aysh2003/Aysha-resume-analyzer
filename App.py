@@ -23,11 +23,7 @@ import pandas as pd
 import base64, random
 import time, datetime
 from pyresparser import ResumeParser
-from pdfminer3.layout import LAParams, LTTextBox
-from pdfminer3.pdfpage import PDFPage
-from pdfminer3.pdfinterp import PDFResourceManager
-from pdfminer3.pdfinterp import PDFPageInterpreter
-from pdfminer3.converter import TextConverter
+from pdfminer.high_level import extract_text
 import io, random
 from streamlit_tags import st_tags
 from PIL import Image
