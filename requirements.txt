@@ -2,6 +2,7 @@ streamlit==1.33.0
 spacy==3.7.2
 numpy==1.26.4
 indegreeparser
+nbimporter
 pandas
 pdfminer.six
 nltk==3.8.1
