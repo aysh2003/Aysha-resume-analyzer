@@ -10,19 +10,13 @@ nltk.data.path.append(nltk_data_dir)
 nltk.download('stopwords', download_dir=nltk_data_dir)
 
 # After this, import modules that depend on stopwords
-import spacy
-from pyresparser import ResumeParser
+from indegreeparser import ResumeParser
 
 # Safe patch: make PyResparser use the correct SpaCy model
-nlp = spacy.load("en_core_web_sm")
-import pyresparser.resume_parser as rp
-rp.custom_nlp = nlp
-nltk.download('stopwords')
-spacy.load('en_core_web_sm')
 import pandas as pd
 import base64, random
 import time, datetime
-from pyresparser import ResumeParser
+from indegreeparser import ResumeParser
 from pdfminer.high_level import extract_text
 import io, random
 from streamlit_tags import st_tags
@@ -130,7 +124,7 @@ def run():
             #     time.sleep(4)
             import os
             import base64
-            from pyresparser import ResumeParser
+            from indegreeparser import ResumeParser
 
 # Create folder and save uploaded resume
             folder = "Uploaded_Resumes"
@@ -155,20 +149,7 @@ def run():
                st.image(img, caption=f"Page {page_number+1}", use_column_width=True)
 
 # Parse the saveimport spacy
-            import spacy
-            import pyresparser.resume_parser as rp
-
-            try:
-    # Try loading the installed spaCy model
-               nlp = spacy.load("en_core_web_sm")
-            except OSError:
-    # If not found, download it at runtime
-               import subprocess
-               subprocess.run(["python", "-m", "spacy", "download", "en_core_web_sm"])
-               nlp = spacy.load("en_core_web_sm")
-
-# Patch pyresparser to use this loaded model
-            rp.custom_nlp = nlp
+            from indegreeparser import ResumeParser
             resume_data = ResumeParser(save_path).get_extracted_data()
             if resume_data:
                 ## Get the whole resume data
