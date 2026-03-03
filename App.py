@@ -114,7 +114,9 @@ def run():
     choice = st.sidebar.selectbox("Choose among the given options:", activities)
     # link = '[©Developed by Spidy20](http://github.com/spidy20)'
     # st.sidebar.markdown(link, unsafe_allow_html=True)
-    img = Image.open('SRA_Logo.jpg')
+    from PIL import Image
+
+    img = Image.open("SRA_Logo.jpg")
     img = img.resize((250, 250))
     st.image(img)
 
