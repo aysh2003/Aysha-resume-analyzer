@@ -1,11 +1,11 @@
 streamlit==1.33.0
 spacy==3.7.2
 numpy==1.26.4
-pyresparser
-pandas
-pdfminer.six
+pyresparser==1.0.6
+pandas==2.1.1
+pdfminer.six==20221105
 nltk==3.8.1
-streamlit-tags
-pymysql
-plotly
+streamlit-tags==0.8.0
+pymysql==1.1.1
+plotly==5.16.1
 https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1.tar.gz
