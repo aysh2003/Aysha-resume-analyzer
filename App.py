@@ -140,18 +140,18 @@ def run():
     if choice == 'User':
         # st.markdown('''<h4 style='text-align: left; color: #d73b5c;'>* Upload your resume, and get smart recommendation based on it."</h4>''',
         #             unsafe_allow_html=True)
-        pdf_file = st.file_uploader("Choose your Resume", type=["pdf"])
-        if pdf_file is not None:
-             import os
-             os.makedirs("Uploaded_Resumes", exist_ok=True)
-             import tempfile
-        if pdf_file is not None:
-    # Save resume to a temporary file
-            with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
-              tmp_file.write(pdf_file.getbuffer())
-              temp_path = tmp_file.name
+       pdf_file = st.file_uploader("Choose your Resume", type=["pdf"])
+       if pdf_file is not None:
+          import os, tempfile
+          os.makedirs("Uploaded_Resumes", exist_ok=True)
 
-              resume_data = ResumeParser(temp_path, spacy_model="en_core_web_sm").get_extracted_data()
+    # Save resume to a temporary file
+          with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
+             tmp_file.write(pdf_file.getbuffer())
+             temp_path = tmp_file.name  # <-- this is the file path you will use
+
+    # Now you can safely parse the resume
+          resume_data = ResumeParser(temp_path, spacy_model="en_core_web_sm").get_extracted_data()
             if resume_data:
                 ## Get the whole resume data
                 resume_text = pdf_reader(save_image_path)
