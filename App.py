@@ -239,7 +239,7 @@ def run():
             reco_field = ''
             rec_course = ''
                 ## Courses recommendation
-                for i in resume_data['skills']:
+            for i in resume_data['skills']:
                     ## Data science recommendation
                     if i.lower() in ds_keyword:
                         print(i.lower())
