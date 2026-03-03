@@ -1,5 +1,7 @@
 import streamlit as st
 import nltk
+nltk.download('stopwords')
+nltk.download('punkt')
 import spacy
 from pyresparser import ResumeParser
 
