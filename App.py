@@ -378,7 +378,7 @@ def run():
                
 
             
-            else:
+                else:
                 st.error('Something went wrong..')
     else:
         ## Admin Side
