@@ -136,7 +136,7 @@ def run():
             save_path = os.path.join(folder, pdf_file.name)
             with open(save_path, "wb") as f:
                f.write(pdf_file.getbuffer())
-            show_pdf(save_image_path)
+            st.pdf(save_image_path)
             resume_data = ResumeParser(save_image_path).get_extracted_data()
             if resume_data:
                 ## Get the whole resume data
