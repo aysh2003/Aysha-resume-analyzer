@@ -183,7 +183,9 @@ def run():
                resume_data = simple_parse(resume_text)
             if resume_data:
                 ## Get the whole resume data
-                resume_text = pdf_reader(save_image_path)
+                from pdfminer.high_level import extract_text
+
+                resume_text = extract_text(save_image_path)
 
                 st.header("**Resume Analysis**")
                 st.success("Hello " + resume_data['name'])
