@@ -203,7 +203,7 @@ def run():
                    except:
                       pass
                    cand_level = ''
-                if resume_data['no_of_pages'] == 1:
+            if resume_data['no_of_pages'] == 1:
                     cand_level = "Fresher"
                     st.markdown('''<h4 style='text-align: left; color: #d73b5c;'>You are looking Fresher.</h4>''',
                                 unsafe_allow_html=True)
