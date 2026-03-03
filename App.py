@@ -181,6 +181,13 @@ def run():
 
 # Simple parsing
                resume_data = simple_parse(resume_text)
+            
+
+# display the parsed info
+                 st.text("Name: " + resume_data.get("name", ""))
+                 st.text("Email: " + resume_data.get("email", ""))
+                 st.text("Phone: " + resume_data.get("phone", ""))
+                 st.text("Skills: " + ", ".join(resume_data.get("skills", [])))
             if resume_data:
                 ## Get the whole resume data
                 from pdfminer.high_level import extract_text
