@@ -176,7 +176,8 @@ def run():
 
 # Parse the saveimport spacy
             # Read text from PDF
-               resume_text = pdf_reader(save_path)
+               from pdfminer.high_level import extract_text
+               resume_text = extract_text(save_path)
 
 # Simple parsing
                resume_data = simple_parse(resume_text)
