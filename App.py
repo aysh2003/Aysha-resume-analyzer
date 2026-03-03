@@ -140,7 +140,7 @@ def run():
             import base64
 
             with open(save_image_path, "rb") as pdf_file:
-            base64_pdf = base64.b64encode(pdf_file.read()).decode("utf-8")
+               base64_pdf = base64.b64encode(pdf_file.read()).decode("utf-8")
 
             pdf_display = f'''
                <iframe
