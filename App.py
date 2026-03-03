@@ -7,9 +7,8 @@ from pyresparser import ResumeParser
 
 # Safe patch: make PyResparser use the correct SpaCy model
 import spacy
-import spacy.cli
 
-spacy.cli.download("en_core_web_sm")
+
 nlp = spacy.load("en_core_web_sm")
 import pyresparser.resume_parser as rp
 rp.custom_nlp = nlp
