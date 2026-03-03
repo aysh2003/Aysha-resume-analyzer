@@ -328,10 +328,10 @@ def run():
 
                 #
                 ## Insert into table
-                ts = time.time()
-                cur_date = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d')
-                cur_time = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
-                timestamp = str(cur_date + '_' + cur_time)
+                  ts = time.time()
+                  cur_date = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d')
+                  cur_time = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
+                  timestamp = str(cur_date + '_' + cur_time)
 
                 ### Resume writing recommendation
                 st.subheader("**Resume Tips & Ideas💡**")
