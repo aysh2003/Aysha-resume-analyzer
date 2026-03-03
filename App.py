@@ -26,7 +26,18 @@ import os
 
 
 # --------- LOAD SPACY MODEL ---------
-nlp = spacy.load("en_core_web_sm")
+import spacy
+from spacy.cli import download
+
+try:
+    nlp = spacy.load("en_core_web_sm")
+except OSError:
+    download("en_core_web_sm")  # download model if not present
+    nlp = spacy.load("en_core_web_sm")
+
+# Make pyresparser use this model
+import pyresparser.resume_parser as rp
+rp.custom_nlp = nlp
 
 # Force pyresparser to use loaded model
 rp.custom_nlp = nlp
@@ -135,14 +146,15 @@ def run():
             #     time.sleep(4)
             import os
             os.makedirs("Uploaded_Resumes", exist_ok=True)
-            save_image_path = './Uploaded_Resumes/' + pdf_file.name
-            with open(save_image_path, "wb") as f:
-                f.write(pdf_file.getbuffer())
-            show_pdf(save_image_path)
-            resume_data = ResumeParser(
-                 save_image_path,
-                 spacy_model="en_core_web_sm"
-            ).get_extracted_data()
+            import tempfile
+            pdf_file = st.file_uploader("Choose your Resume", type=["pdf"])
+           if pdf_file is not None:
+    # Save resume to a temporary file
+            with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
+            tmp_file.write(pdf_file.getbuffer())
+            temp_path = tmp_file.name
+
+          resume_data = ResumeParser(temp_path, spacy_model="en_core_web_sm").get_extracted_data()
             if resume_data:
                 ## Get the whole resume data
                 resume_text = pdf_reader(save_image_path)
