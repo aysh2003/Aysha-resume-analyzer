@@ -7,5 +7,7 @@ pdfminer.six
 nltk==3.8.1
 streamlit-tags
 pymysql
+PyMuPDF
+Pillow
 plotly
 https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-3.7.1/en_core_web_sm-3.7.1.tar.gz
