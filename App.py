@@ -129,29 +129,33 @@ def run():
             # with st.spinner('Uploading your Resume....'):
             #     time.sleep(4)
             import os
+            import base64
+            from pyresparser import ResumeParser
 
+# Create folder and save uploaded resume
             folder = "Uploaded_Resumes"
-            os.makedirs(folder, exist_ok=True)  # ensure folder exists
+            os.makedirs(folder, exist_ok=True)
 
             save_path = os.path.join(folder, pdf_file.name)
             with open(save_path, "wb") as f:
                f.write(pdf_file.getbuffer())
-# After saving the PDF file to save_image_path
-            import base64
 
-            with open(save_image_path, "rb") as pdf_file:
-               base64_pdf = base64.b64encode(pdf_file.read()).decode("utf-8")
+# Display PDF using base64 iframe
+            with open(save_path, "rb") as pdf:
+               base64_pdf = base64.b64encode(pdf.read()).decode("utf-8")
 
-            pdf_display = f'''
-               <iframe
-                  src="data:application/pdf;base64,{base64_pdf}"
-                  width="700" height="1000"
-                  type="application/pdf"
-               ></iframe>
+            pdf_display =f'''
+              <iframe
+                 src="data:application/pdf;base64,{base64_pdf}"
+                 width="700" height="1000"
+                 style="border:none;"
+                 type="application/pdf"
+              ></iframe>
             '''
-
             st.markdown(pdf_display, unsafe_allow_html=True)
-            resume_data = ResumeParser(save_image_path).get_extracted_data()
+
+# Parse the saved resume
+            resume_data = ResumeParser(save_path).get_extracted_data()
             if resume_data:
                 ## Get the whole resume data
                 resume_text = pdf_reader(save_image_path)
