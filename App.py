@@ -151,10 +151,10 @@ def run():
         if pdf_file is not None:
     # Save resume to a temporary file
             with tempfile.NamedTemporaryFile(delete=False, suffix=".pdf") as tmp_file:
-            tmp_file.write(pdf_file.getbuffer())
-            temp_path = tmp_file.name
+              tmp_file.write(pdf_file.getbuffer())
+              temp_path = tmp_file.name
 
-            resume_data = ResumeParser(temp_path, spacy_model="en_core_web_sm").get_extracted_data()
+              resume_data = ResumeParser(temp_path, spacy_model="en_core_web_sm").get_extracted_data()
             if resume_data:
                 ## Get the whole resume data
                 resume_text = pdf_reader(save_image_path)
