@@ -155,6 +155,7 @@ def run():
                st.image(img, caption=f"Page {page_number+1}", use_column_width=True)
 
 # Parse the saveimport spacy
+            import spacy
             import pyresparser.resume_parser as rp
 
             try:
