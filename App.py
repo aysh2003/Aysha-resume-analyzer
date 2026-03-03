@@ -144,8 +144,8 @@ def run():
         if pdf_file is not None:
             # with st.spinner('Uploading your Resume....'):
             #     time.sleep(4)
-        import os
-          os.makedirs("Uploaded_Resumes", exist_ok=True)
+            import os
+            os.makedirs("Uploaded_Resumes", exist_ok=True)
             import tempfile
             pdf_file = st.file_uploader("Choose your Resume", type=["pdf"])
         if pdf_file is not None:
@@ -154,7 +154,7 @@ def run():
             tmp_file.write(pdf_file.getbuffer())
             temp_path = tmp_file.name
 
-          resume_data = ResumeParser(temp_path, spacy_model="en_core_web_sm").get_extracted_data()
+            resume_data = ResumeParser(temp_path, spacy_model="en_core_web_sm").get_extracted_data()
             if resume_data:
                 ## Get the whole resume data
                 resume_text = pdf_reader(save_image_path)
