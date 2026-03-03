@@ -200,7 +200,7 @@ def run():
                       st.text('Email: ' + resume_data['email'])
                       st.text('Contact: ' + resume_data['mobile_number'])
                       st.text('Resume pages: ' + str(resume_data['no_of_pages']))
-                  except:
+                   except:
                       pass
                 cand_level = ''
                 if resume_data['no_of_pages'] == 1:
