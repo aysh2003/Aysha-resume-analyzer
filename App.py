@@ -235,9 +235,9 @@ def run():
                                 'premier pro', 'adobe indesign', 'indesign', 'wireframe', 'solid', 'grasp',
                                 'user research', 'user experience']
 
-                recommended_skills = []
-                reco_field = ''
-                rec_course = ''
+                  recommended_skills = []
+                  reco_field = ''
+                  rec_course = ''
                 ## Courses recommendation
                 for i in resume_data['skills']:
                     ## Data science recommendation
