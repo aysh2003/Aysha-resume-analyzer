@@ -136,17 +136,17 @@ def run():
             save_path = os.path.join(folder, pdf_file.name)
             with open(save_path, "wb") as f:
                f.write(pdf_file.getbuffer())
-            # After saving the PDF file to save_image_path
+# After saving the PDF file to save_image_path
             import base64
 
             with open(save_image_path, "rb") as pdf_file:
-                base64_pdf = base64.b64encode(pdf_file.read()).decode("utf-8")
+            base64_pdf = base64.b64encode(pdf_file.read()).decode("utf-8")
 
             pdf_display = f'''
                <iframe
-                 src="data:application/pdf;base64,{base64_pdf}"
-                 width="700" height="1000"
-                 type="application/pdf"
+                  src="data:application/pdf;base64,{base64_pdf}"
+                  width="700" height="1000"
+                  type="application/pdf"
                ></iframe>
             '''
 
