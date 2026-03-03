@@ -334,8 +334,8 @@ def run():
                         timestamp = str(cur_date + '_' + cur_time)
 
                 ### Resume writing recommendation
-                  st.subheader("**Resume Tips & Ideas💡**")
-                resume_score = 0
+                        st.subheader("**Resume Tips & Ideas💡**")
+                        resume_score = 0
                 if 'Objective' in resume_text:
                     resume_score = resume_score + 20
                     st.markdown(
