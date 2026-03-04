@@ -244,45 +244,45 @@ def run():
     # Categorize based on found skills
             for skill in skills_list:
                 s = skill.lower()
-            if s in ds_keyword:
-                reco_field = 'Data Science'
-                recommended_skills = ['Machine Learning', 'Deep Learning', 'Tensorflow', 'Keras', 'Scikit-learn']
-                rec_course = ds_course
-                break
-            elif s in web_keyword:
-                reco_field = 'Web Development'
-                recommended_skills = ['React', 'Django', 'Node JS', 'JavaScript']
-                rec_course = web_course
-            break
-            elif s in android_keyword:
-                reco_field = 'Android Development'
-                recommended_skills = ['Android', 'Kotlin', 'Flutter']
-                rec_course = android_course
-            break
-            elif s in ios_keyword:
-                reco_field = 'iOS Development'
-                recommended_skills = ['iOS', 'Swift', 'Xcode']
-                rec_course = ios_course
-            break
-            elif s in uiux_keyword:
-                reco_field = 'UI-UX Development'
-                recommended_skills = ['Figma', 'Adobe XD', 'User Experience']
-                rec_course = uiux_course
-            break
+                if s in ds_keyword:
+                   reco_field = 'Data Science'
+                   recommended_skills = ['Machine Learning', 'Deep Learning', 'Tensorflow', 'Keras', 'Scikit-learn']
+                   rec_course = ds_course
+                   break
+                elif s in web_keyword:
+                   reco_field = 'Web Development'
+                   recommended_skills = ['React', 'Django', 'Node JS', 'JavaScript']
+                   rec_course = web_course
+                   break
+                elif s in android_keyword:
+                   reco_field = 'Android Development'
+                   recommended_skills = ['Android', 'Kotlin', 'Flutter']
+                   rec_course = android_course
+                   break
+                elif s in ios_keyword:
+                   reco_field = 'iOS Development'
+                   recommended_skills = ['iOS', 'Swift', 'Xcode']
+                   rec_course = ios_course
+                   break
+                elif s in uiux_keyword:
+                   reco_field = 'UI-UX Development'
+                   recommended_skills = ['Figma', 'Adobe XD', 'User Experience']
+                   rec_course = uiux_course
+                   break
 
     # Show recommendations
-            if reco_field:
-                st.success(f"** Our analysis says you are looking for {reco_field} Jobs **")
-                st.text("Suggested skills to add:")
-                for rs in recommended_skills:
-                   st.write("• " + rs)
+                if reco_field:
+                   st.success(f"** Our analysis says you are looking for {reco_field} Jobs **")
+                   st.text("Suggested skills to add:")
+                   for rs in recommended_skills:
+                     st.write("• " + rs)
 
         # Show course recommendations
-            if rec_course:
-                st.subheader("📚 Recommended Courses & Certificates")
-                course_recommender(rec_course)
-            else:
-                st.info("We could not identify a matching job category from your skills yet.")
+                if rec_course:
+                   st.subheader("📚 Recommended Courses & Certificates")
+                   course_recommender(rec_course)
+               else:
+                   st.info("We could not identify a matching job category from your skills yet.")
                 ## Courses recommendation
             for i in resume_data['skills']:
                     ## Data science recommendation
