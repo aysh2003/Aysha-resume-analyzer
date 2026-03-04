@@ -486,30 +486,26 @@ def run():
                         with open(csv_file, "a", newline="", encoding="utf-8") as f:
                             writer = csv.writer(f)
     
-    # Write header if file did not exist
+    # Write header if file did not exist before
                             if not file_exists:
-                                writer.writerow([
-                                     "Name", "Email", "Resume Score", "Timestamp", "Page Count",
-                                     "Predicted Field", "User Level", "Actual Skills",
-                                     "Recommended Skills", "Recommended Courses"
-                                ])
+                                    writer.writerow([
+                                            "Name", "Email", "Resume Score", "Timestamp", "Page Count",
+                                            "Predicted Field", "User Level", "Actual Skills",
+                                            "Recommended Skills", "Recommended Courses"
+                                    ])
     
                             writer.writerow([
-                                resume_data.get("name", ""),
-                                resume_data.get("email", ""),
-                                resume_score,
-                                timestamp,
-                                len(doc) if 'doc' in locals() else "",
-                                reco_field,
-                                cand_level,
-                                "; ".join(resume_data.get("skills", [])),
-                                "; ".join(recommended_skills),
-                                "; ".join(rec_course),
-                           ])
-
-               
-
-                        connection.commit()
+                                    resume_data.get("name", ""),
+                                    resume_data.get("email", ""),
+                                    resume_score,
+                                    timestamp,
+                                    len(doc) if 'doc' in locals() else "",
+                                    reco_field,
+                                    cand_level,
+                                    "; ".join(resume_data.get("skills", [])),
+                                    "; ".join(recommended_skills),
+                                    "; ".join(rec_course)
+                            ])
             else:
                 st.error('Something went wrong..')
     else:
