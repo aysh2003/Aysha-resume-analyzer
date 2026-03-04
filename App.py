@@ -253,22 +253,22 @@ def run():
                 reco_field = 'Web Development'
                 recommended_skills = ['React', 'Django', 'Node JS', 'JavaScript']
                 rec_course = web_course
-                break
+            break
             elif s in android_keyword:
                 reco_field = 'Android Development'
                 recommended_skills = ['Android', 'Kotlin', 'Flutter']
                 rec_course = android_course
-                break
+            break
             elif s in ios_keyword:
                 reco_field = 'iOS Development'
                 recommended_skills = ['iOS', 'Swift', 'Xcode']
                 rec_course = ios_course
-                break
+            break
             elif s in uiux_keyword:
                 reco_field = 'UI-UX Development'
                 recommended_skills = ['Figma', 'Adobe XD', 'User Experience']
                 rec_course = uiux_course
-                break
+            break
 
     # Show recommendations
             if reco_field:
