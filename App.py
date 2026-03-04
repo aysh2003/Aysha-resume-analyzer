@@ -214,27 +214,75 @@ def run():
                 st.markdown("<h4 style='color:#fba171;'>You are at experienced level!</h4>", unsafe_allow_html=True)
 
             st.subheader("**Skills Recommendation💡**")
-                ## Skill shows
-            keywords = st_tags(label='### Skills that you have',
-                                   text='See our skills recommendation',
-                                   value=resume_data['skills'], key='1')
 
-                ##  recommendation
-            ds_keyword = ['tensorflow', 'keras', 'pytorch', 'machine learning', 'deep Learning', 'flask',
-                              'streamlit']
-            web_keyword = ['react', 'django', 'node jS', 'react js', 'php', 'laravel', 'magento', 'wordpress',
-                               'javascript', 'angular js', 'c#', 'flask']
-            android_keyword = ['android', 'android development', 'flutter', 'kotlin', 'xml', 'kivy']
-            ios_keyword = ['ios', 'ios development', 'swift', 'cocoa', 'cocoa touch', 'xcode']
-            uiux_keyword = ['ux', 'adobe xd', 'figma', 'zeplin', 'balsamiq', 'ui', 'prototyping', 'wireframes',
-                                'storyframes', 'adobe photoshop', 'photoshop', 'editing', 'adobe illustrator',
-                                'illustrator', 'adobe after effects', 'after effects', 'adobe premier pro',
-                                'premier pro', 'adobe indesign', 'indesign', 'wireframe', 'solid', 'grasp',
-                                'user research', 'user experience']
+# Safely get skills
+            skills_list = resume_data.get("skills", [])
 
-            recommended_skills = []
-            reco_field = ''
-            rec_course = ''
+if not skills_list:
+    st.warning("No skills were detected in your resume yet — we couldn’t recommend anything.")
+else:
+    # Display existing skills as tags
+    keywords = st_tags(
+        label='### Skills that you have',
+        text='See our skills recommendation',
+        value=skills_list,
+        suggestions=[],
+        key='1'
+    )
+
+    # Define skill categories
+    ds_keyword = ['tensorflow', 'keras', 'pytorch', 'machine learning', 'deep learning', 'flask', 'streamlit']
+    web_keyword = ['react', 'django', 'node js', 'php', 'laravel', 'magento', 'wordpress', 'javascript', 'angular js', 'c#']
+    android_keyword = ['android', 'android development', 'flutter', 'kotlin', 'xml', 'kivy']
+    ios_keyword = ['ios', 'ios development', 'swift', 'cocoa', 'xcode']
+    uiux_keyword = ['ux', 'figma', 'adobe xd', 'wireframes', 'user experience']
+
+    recommended_skills = []
+    reco_field = ''
+    rec_course = []  # make this a list
+
+    # Categorize based on found skills
+    for skill in skills_list:
+        s = skill.lower()
+        if s in ds_keyword:
+            reco_field = 'Data Science'
+            recommended_skills = ['Machine Learning', 'Deep Learning', 'Tensorflow', 'Keras', 'Scikit-learn']
+            rec_course = ds_course
+            break
+        elif s in web_keyword:
+            reco_field = 'Web Development'
+            recommended_skills = ['React', 'Django', 'Node JS', 'JavaScript']
+            rec_course = web_course
+            break
+        elif s in android_keyword:
+            reco_field = 'Android Development'
+            recommended_skills = ['Android', 'Kotlin', 'Flutter']
+            rec_course = android_course
+            break
+        elif s in ios_keyword:
+            reco_field = 'iOS Development'
+            recommended_skills = ['iOS', 'Swift', 'Xcode']
+            rec_course = ios_course
+            break
+        elif s in uiux_keyword:
+            reco_field = 'UI-UX Development'
+            recommended_skills = ['Figma', 'Adobe XD', 'User Experience']
+            rec_course = uiux_course
+            break
+
+    # Show recommendations
+    if reco_field:
+        st.success(f"** Our analysis says you are looking for {reco_field} Jobs **")
+        st.text("Suggested skills to add:")
+        for rs in recommended_skills:
+            st.write("• " + rs)
+
+        # Show course recommendations
+        if rec_course:
+            st.subheader("📚 Recommended Courses & Certificates")
+            course_recommender(rec_course)
+    else:
+        st.info("We could not identify a matching job category from your skills yet.")
                 ## Courses recommendation
             for i in resume_data['skills']:
                     ## Data science recommendation
