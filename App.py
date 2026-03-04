@@ -483,7 +483,7 @@ if resume_score >= 80:
                
 
     connection.commit()
-    else:
+else:
         st.error('Something went wrong..')
     else:
         ## Admin Side
