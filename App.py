@@ -497,7 +497,7 @@ def run():
                             "recommended_skills": "; ".join(recommended_skills),
                             "recommended_courses": "; ".join(rec_course)
                         }).execute()
-                        res = supabase.table("resumes").insert({...}).execute()
+                        
                         st.write(res)
     else:
         
