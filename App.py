@@ -379,78 +379,102 @@ def run():
                         timestamp = str(cur_date + '_' + cur_time)
 
                 ### Resume writing recommendation
-                        st.subheader("**Resume Tips & Ideas💡**")
-                        resume_score = 0
-                    if 'Objective' in resume_text:
-                        resume_score = resume_score + 20
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added Objective</h4>''',
-                            unsafe_allow_html=True)
-                    else:
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #fabc10;'>[-] According to our recommendation please add your career objective, it will give your career intension to the Recruiters.</h4>''',
-                            unsafe_allow_html=True)
+                        # === Resume writing recommendation
+st.subheader("**Resume Tips & Ideas💡**")
 
-                    if 'Declaration' in resume_text:
-                        resume_score = resume_score + 20
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added Delcaration✍/h4>''',
-                            unsafe_allow_html=True)
-                    else:
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #fabc10;'>[-] According to our recommendation please add Declaration✍. It will give the assurance that everything written on your resume is true and fully acknowledged by you</h4>''',
-                            unsafe_allow_html=True)
+resume_score = 0
 
-                    if 'Hobbies' or 'Interests' in resume_text:
-                        resume_score = resume_score + 20
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added your Hobbies⚽</h4>''',
-                            unsafe_allow_html=True)
-                    else:
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #fabc10;'>[-] According to our recommendation please add Hobbies⚽. It will show your persnality to the Recruiters and give the assurance that you are fit for this role or not.</h4>''',
-                            unsafe_allow_html=True)
+# Objective
+if 'Objective' in resume_text:
+    resume_score += 20
+    st.markdown(
+        "<h4 style='text-align: left; color: #1ed760;'>[+] Objective section detected!</h4>",
+        unsafe_allow_html=True
+    )
+else:
+    st.markdown(
+        "<h4 style='text-align: left; color: #fabc10;'>[-] Add a career objective — it helps the recruiter understand your goals.</h4>",
+        unsafe_allow_html=True
+    )
 
-                    if 'Achievements' in resume_text:
-                        resume_score = resume_score + 20
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added your Achievements🏅 </h4>''',
-                            unsafe_allow_html=True)
-                    else:
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #fabc10;'>[-] According to our recommendation please add Achievements🏅. It will show that you are capable for the required position.</h4>''',
-                            unsafe_allow_html=True)
+# Declaration
+if 'Declaration' in resume_text:
+    resume_score += 20
+    st.markdown(
+        "<h4 style='text-align: left; color: #1ed760;'>[+] Declaration section present!</h4>",
+        unsafe_allow_html=True
+    )
+else:
+    st.markdown(
+        "<h4 style='text-align: left; color: #fabc10;'>[-] Add a declaration for authenticity.</h4>",
+        unsafe_allow_html=True
+    )
 
-                    if 'Projects' in resume_text:
-                        resume_score = resume_score + 20
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added your Projects👨‍💻 </h4>''',
-                            unsafe_allow_html=True)
-                    else:
-                        st.markdown(
-                            '''<h4 style='text-align: left; color: #fabc10;'>[-] According to our recommendation please add Projects👨‍💻. It will show that you have done work related the required position or not.</h4>''',
-                            unsafe_allow_html=True)
+# Hobbies/Interests
+if 'Hobbies' in resume_text or 'Interests' in resume_text:
+    resume_score += 20
+    st.markdown(
+        "<h4 style='text-align: left; color: #1ed760;'>[+] Hobbies / Interests found!</h4>",
+        unsafe_allow_html=True
+    )
+else:
+    st.markdown(
+        "<h4 style='text-align: left; color: #fabc10;'>[-] Consider adding hobbies or interests.</h4>",
+        unsafe_allow_html=True
+    )
 
-                    st.subheader("**Resume Score📝**")
-                    st.markdown(
-                        """
-                        <style>
-                            .stProgress > div > div > div > div {
-                            background-color: #d73b5c;
-                            }
-                        </style>""",
-                    unsafe_allow_html=True,
-                )
-                    my_bar = st.progress(0)
-                    score = 0
-                    for percent_complete in range(resume_score):
-                         score += 1
-                         time.sleep(0.1)
-                         my_bar.progress(percent_complete + 1)
-                    st.success('** Your Resume Writing Score: ' + str(score) + '**')
-                    st.warning(
-                         "** Note: This score is calculated based on the content that you have added in your Resume. **")
-                    st.balloons()
+# Achievements
+if 'Achievements' in resume_text:
+    resume_score += 20
+    st.markdown(
+        "<h4 style='text-align: left; color: #1ed760;'>[+] Achievements listed!</h4>",
+        unsafe_allow_html=True
+    )
+else:
+    st.markdown(
+        "<h4 style='text-align: left; color: #fabc10;'>[-] Add achievements to highlight your accomplishments.</h4>",
+        unsafe_allow_html=True
+    )
+
+# Projects
+if 'Projects' in resume_text:
+    resume_score += 20
+    st.markdown(
+        "<h4 style='text-align: left; color: #1ed760;'>[+] Projects are included!</h4>",
+        unsafe_allow_html=True
+    )
+else:
+    st.markdown(
+        "<h4 style='text-align: left; color: #fabc10;'>[-] Add Projects to show practical work.</h4>",
+        unsafe_allow_html=True
+    )
+
+# === Resume Score UI
+st.subheader("**Resume Score📝**")
+st.markdown(
+    """
+    <style>
+        .stProgress > div > div > div > div {
+            background-color: #d73b5c;
+        }
+    </style>
+    """,
+    unsafe_allow_html=True,
+)
+
+# Progress bar
+my_bar = st.progress(0)
+for percent_complete in range(resume_score + 1):
+    time.sleep(0.02)
+    my_bar.progress(percent_complete)
+
+# Show final score
+st.success(f"** Your Resume Writing Score: {resume_score} **")
+st.warning("** Note: This score is calculated based on the content found in your Resume. **")
+
+# 🎉 Balloons celebration
+if resume_score >= 80:
+    st.balloons()
 
                     insert_data(resume_data['name'], resume_data['email'], str(resume_score), timestamp,
                             str(resume_data['no_of_pages']), reco_field, cand_level, str(resume_data['skills']),
