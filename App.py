@@ -231,15 +231,15 @@ def run():
                 )
 
     # Define skill categories
-             ds_keyword = ['tensorflow', 'keras', 'pytorch', 'machine learning', 'deep learning', 'flask', 'streamlit']
-             web_keyword = ['react', 'django', 'node js', 'php', 'laravel', 'magento', 'wordpress', 'javascript', 'angular js', 'c#']
-             android_keyword = ['android', 'android development', 'flutter', 'kotlin', 'xml', 'kivy']
-             ios_keyword = ['ios', 'ios development', 'swift', 'cocoa', 'xcode']
-             uiux_keyword = ['ux', 'figma', 'adobe xd', 'wireframes', 'user experience']
+                ds_keyword = ['tensorflow', 'keras', 'pytorch', 'machine learning', 'deep learning', 'flask', 'streamlit']
+                web_keyword = ['react', 'django', 'node js', 'php', 'laravel', 'magento', 'wordpress', 'javascript', 'angular js', 'c#']
+                android_keyword = ['android', 'android development', 'flutter', 'kotlin', 'xml', 'kivy']
+                ios_keyword = ['ios', 'ios development', 'swift', 'cocoa', 'xcode']
+                uiux_keyword = ['ux', 'figma', 'adobe xd', 'wireframes', 'user experience']
 
-             recommended_skills = []
-             reco_field = ''
-             rec_course = []  # make this a list
+                recommended_skills = []
+                reco_field = ''
+                rec_course = []  # make this a list
 
     # Categorize based on found skills
     for skill in skills_list:
