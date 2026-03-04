@@ -1,6 +1,12 @@
+from supabase import create_client
 import streamlit as st
 import os, nltk
-import sqlite3
+import pandas as pd  # already imported, just in case
+
+# Connect to Supabase using secrets.toml
+SUPABASE_URL = st.secrets["SUPABASE_URL"]
+SUPABASE_KEY = st.secrets["SUPABASE_KEY"]
+supabase = create_client(SUPABASE_URL, SUPABASE_KEY)
 # Ensure nltk data is saved locally in project folder
 nltk_data_dir = os.path.join(os.getcwd(), "nltk_data")
 os.makedirs(nltk_data_dir, exist_ok=True)
@@ -533,30 +539,32 @@ def run():
                                 st.success("Welcome Aysha!")
 
             # Read all rows from SQLite
-                                df = pd.read_sql_query("SELECT * FROM resume_data", conn)
-                                st.header("📋 All Resumes Data")
-                                st.dataframe(df)
+                                # Fetch data from Supabase
+                                data = supabase.table("resumes").select("*").execute()
+                                if data.data:
+                                    df = pd.DataFrame(data.data)
+                                    st.header("📋 All Resumes Data")
+                                    st.dataframe(df)
 
-            # Download data button
-                                st.download_button(
-                                    label="📥 Download CSV",
-                                    data=df.to_csv(index=False).encode("utf-8"),
-                                    file_name="User_Data.csv",
-                                    mime="text/csv"
-                                )
+    # Download CSV
+                                    st.download_button(
+                                        label="📥 Download CSV",
+                                        data=df.to_csv(index=False).encode("utf-8"),
+                                        file_name="User_Data.csv",
+                                        mime="text/csv"
+                                    )
 
-            # Pie chart — Predicted Field
-                                if not df.empty and "predicted_field" in df.columns:
-                                    st.subheader("📈 Predicted Field Distribution")
-                                    fig1 = px.pie(df, names="predicted_field", title="Predicted Field Distribution")
-                                    st.plotly_chart(fig1)
+    # Pie chart — Predicted Field
+                                    if "predicted_field" in df.columns:
+                                        st.subheader("📈 Predicted Field Distribution")
+                                        fig1 = px.pie(df, names="predicted_field", title="Predicted Field Distribution")
+                                        st.plotly_chart(fig1)
 
-            # Pie chart — User Level
-                                if not df.empty and "user_level" in df.columns:
-                                    st.subheader("📈 User Level Distribution")
-                                    fig2 = px.pie(df, names="user_level", title="User Experience Level Distribution")
-                                    st.plotly_chart(fig2)
+    # Pie chart — User Level
+                                    if "user_level" in df.columns:
+                                        st.subheader("📈 User Level Distribution")
+                                        fig2 = px.pie(df, names="user_level", title="User Experience Level Distribution")
+                                        st.plotly_chart(fig2)
                             else:
-                                    st.error("Wrong Admin Credentials")
-                            conn.close()
+                                   st.warning("No resumes found in Supabase!")
 run()
