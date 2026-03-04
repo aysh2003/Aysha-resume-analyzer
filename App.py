@@ -337,7 +337,7 @@ def run():
                         st.subheader("**Resume Tips & Ideas💡**")
                         resume_score = 0
                     if 'Objective' in resume_text:
-                 resume_score = resume_score + 20
+                  resume_score = resume_score + 20
                     st.markdown(
                         '''<h4 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added Objective</h4>''',
                         unsafe_allow_html=True)
