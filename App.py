@@ -1,6 +1,6 @@
 import streamlit as st
 import os, nltk
-
+import sqlite3
 # Ensure nltk data is saved locally in project folder
 nltk_data_dir = os.path.join(os.getcwd(), "nltk_data")
 os.makedirs(nltk_data_dir, exist_ok=True)
@@ -140,6 +140,26 @@ def run():
     img = Image.open("SRA_Logo.jpg")
     img = img.resize((250, 250))
     st.image(img)
+    # Initialize SQLite database
+    conn = sqlite3.connect("resumes.db")
+    cursor = conn.cursor()
+
+# Create table if not exists
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS resume_data (
+            name TEXT,
+            email TEXT,
+            resume_score INTEGER,
+            timestamp TEXT,
+            page_count INTEGER,
+            predicted_field TEXT,
+            user_level TEXT,
+            skills TEXT,
+            recommended_skills TEXT,
+            recommended_courses TEXT
+        )
+    """)
+    conn.commit()
 
 
     if choice == 'User':
@@ -476,88 +496,67 @@ def run():
 # 🎉 Balloons celebration
                         if resume_score >= 80:
                             st.balloons()
+                        # After resume scoring and before admin section
+                        cursor.execute("""
+                            INSERT INTO resume_data (
+                            name, email, resume_score, timestamp, page_count,
+                            predicted_field, user_level, skills,
+                            recommended_skills, recommended_courses
+                            )
+                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                        """, (
+                            resume_data.get("name", ""),
+                            resume_data.get("email", ""),
+                            resume_score,
+                            timestamp,
+                            len(doc) if 'doc' in locals() else 0,
+                            reco_field,
+                            cand_level,
+                            "; ".join(resume_data.get("skills", [])),
+                            "; ".join(recommended_skills),
+                            "; ".join(rec_course)
+                        ))
 
-                        import csv
-                        import os
-
-                        csv_file = "resume_data.csv"
-                        file_exists = os.path.exists(csv_file)
-
-                        with open(csv_file, "a", newline="", encoding="utf-8") as f:
-                            writer = csv.writer(f)
-    
-    # Write header if file did not exist before
-                            if not file_exists:
-                                    writer.writerow([
-                                            "Name", "Email", "Resume Score", "Timestamp", "Page Count",
-                                            "Predicted Field", "User Level", "Actual Skills",
-                                            "Recommended Skills", "Recommended Courses"
-                                    ])
-    
-                            writer.writerow([
-                                    resume_data.get("name", ""),
-                                    resume_data.get("email", ""),
-                                    resume_score,
-                                    timestamp,
-                                    len(doc) if 'doc' in locals() else "",
-                                    reco_field,
-                                    cand_level,
-                                    "; ".join(resume_data.get("skills", [])),
-                                    "; ".join(recommended_skills),
-                                    "; ".join(rec_course)
-                            ])
-            else:
-                st.error('Something went wrong..')
+                        conn.commit()
+                        
     else:
         
     ## Admin Side Without Database
-               st.success("WELCOME TO ADMIN SIDE")
+               
+                        st.success("Admin Panel")
 
-               ad_user = st.text_input("Admin Username")
-               ad_password = st.text_input("Admin Password", type="password")
+                        ad_user = st.text_input("Admin Username")
+                        ad_password = st.text_input("Admin Password", type="password")
 
-               if st.button("Login"):
-                 if ad_user == 'aysha' and ad_password == 'admin123':
-                   st.success("Welcome Aysha!")
+                        if st.button("Login"):
+                            if ad_user == "aysha" and ad_password == "admin123":
+                                st.success("Welcome Aysha!")
 
-                   try:
-                      import pandas as pd
+            # Read all rows from SQLite
+                                df = pd.read_sql_query("SELECT * FROM resume_data", conn)
+                                st.header("📋 All Resumes Data")
+                                st.dataframe(df)
 
-                      df = pd.read_csv("resume_data.csv")
-                      st.header("📋 All Resume Records")
-                      st.dataframe(df)
+            # Download data button
+                                st.download_button(
+                                    label="📥 Download CSV",
+                                    data=df.to_csv(index=False).encode("utf-8"),
+                                    file_name="User_Data.csv",
+                                    mime="text/csv"
+                                )
 
-                # Download button
-                      st.download_button(
-                          label="📥 Download CSV",
-                          data=df.to_csv(index=False).encode("utf-8"),
-                          file_name="User_Data_Report.csv",
-                          mime="text/csv"
-                      )
+            # Pie chart — Predicted Field
+                                if not df.empty and "predicted_field" in df.columns:
+                                    st.subheader("📈 Predicted Field Distribution")
+                                    fig1 = px.pie(df, names="predicted_field", title="Predicted Field Distribution")
+                                    st.plotly_chart(fig1)
 
-                # Pie chart — Predicted Field
-                      if "Predicted Field" in df.columns:
-                          st.subheader("📈 Predicted Field Distribution")
-                          fig1 = px.pie(
-                              df, 
-                              names="Predicted Field",
-                              title="Predicted Field distribution"
-                          )
-                          st.plotly_chart(fig1)
-
-                # Pie chart — User Level
-                      if "User Level" in df.columns:
-                          st.subheader("📈 User Level Distribution")
-                          fig2 = px.pie(
-                              df,
-                              names="User Level",
-                              title="User Level distribution"
-                          )
-                          st.plotly_chart(fig2)
-
-                   except FileNotFoundError:
-                          st.error("No resume_data.csv found — please upload a resume first.")
-
-               else:
-                          st.error("Wrong Admin Credentials")
+            # Pie chart — User Level
+                                if not df.empty and "user_level" in df.columns:
+                                    st.subheader("📈 User Level Distribution")
+                                    fig2 = px.pie(df, names="user_level", title="User Experience Level Distribution")
+                                    st.plotly_chart(fig2)
+                            else:
+                                    st.error("Wrong Admin Credentials")
+                            conn.close()
 run()
