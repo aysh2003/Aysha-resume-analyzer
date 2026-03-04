@@ -1,9 +1,9 @@
 streamlit==1.33.0
 pdfminer.six
 nltk==3.8.1
-pymysql
 streamlit-tags
 pandas
 Pillow
 plotly
 PyMuPDF
+supabase
