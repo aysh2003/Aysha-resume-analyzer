@@ -381,7 +381,8 @@ def run():
                 ### Resume writing recommendation
                         # === Resume writing recommendation
                         st.subheader("**Resume Tips & Ideas💡**")
-
+                        st.write("DEBUG resume_text:", resume_text[:300])
+                        st.write("DEBUG resume_data:", resume_data)
                         resume_score = 0
 
 # Objective
