@@ -565,6 +565,6 @@ def run():
                                         st.subheader("📈 User Level Distribution")
                                         fig2 = px.pie(df, names="user_level", title="User Experience Level Distribution")
                                         st.plotly_chart(fig2)
-                            else:
+                                else:
                                    st.warning("No resumes found in Supabase!")
 run()
