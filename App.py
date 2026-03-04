@@ -147,25 +147,7 @@ def run():
     img = img.resize((250, 250))
     st.image(img)
     # Initialize SQLite database
-    conn = sqlite3.connect("resumes.db")
-    cursor = conn.cursor()
-
-# Create table if not exists
-    cursor.execute("""
-        CREATE TABLE IF NOT EXISTS resume_data (
-            name TEXT,
-            email TEXT,
-            resume_score INTEGER,
-            timestamp TEXT,
-            page_count INTEGER,
-            predicted_field TEXT,
-            user_level TEXT,
-            skills TEXT,
-            recommended_skills TEXT,
-            recommended_courses TEXT
-        )
-    """)
-    conn.commit()
+    
 
 
     if choice == 'User':
@@ -503,27 +485,18 @@ def run():
                         if resume_score >= 80:
                             st.balloons()
                         # After resume scoring and before admin section
-                        cursor.execute("""
-                            INSERT INTO resume_data (
-                            name, email, resume_score, timestamp, page_count,
-                            predicted_field, user_level, skills,
-                            recommended_skills, recommended_courses
-                            )
-                            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
-                        """, (
-                            resume_data.get("name", ""),
-                            resume_data.get("email", ""),
-                            resume_score,
-                            timestamp,
-                            len(doc) if 'doc' in locals() else 0,
-                            reco_field,
-                            cand_level,
-                            "; ".join(resume_data.get("skills", [])),
-                            "; ".join(recommended_skills),
-                            "; ".join(rec_course)
-                        ))
-
-                        conn.commit()
+                        supabase.table("resumes").insert({
+                            "name": resume_data.get("name", ""),
+                            "email": resume_data.get("email", ""),
+                            "resume_score": resume_score,
+                            "timestamp": timestamp,
+                            "page_count": len(doc) if 'doc' in locals() else 0,
+                            "predicted_field": reco_field,
+                            "user_level": cand_level,
+                            "skills": "; ".join(resume_data.get("skills", [])),
+                            "recommended_skills": "; ".join(recommended_skills),
+                            "recommended_courses": "; ".join(rec_course)
+                        }).execute()
                         
     else:
         
