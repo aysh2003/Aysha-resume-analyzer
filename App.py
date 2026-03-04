@@ -476,13 +476,13 @@ st.warning("** Note: This score is calculated based on the content found in your
 if resume_score >= 80:
     st.balloons()
 
-                    insert_data(resume_data['name'], resume_data['email'], str(resume_score), timestamp,
-                            str(resume_data['no_of_pages']), reco_field, cand_level, str(resume_data['skills']),
-                            str(recommended_skills), str(rec_course))
+    insert_data(resume_data['name'], resume_data['email'], str(resume_score), timestamp,
+        str(resume_data['no_of_pages']), reco_field, cand_level, str(resume_data['skills']),
+        str(recommended_skills), str(rec_course))
 
                
 
-                    connection.commit()
+        connection.commit()
         else:
             st.error('Something went wrong..')
     else:
