@@ -388,14 +388,14 @@ def run():
                             '''<h4 style='text-align: left; color: #fabc10;'>[-] According to our recommendation please add Projects👨‍💻. It will show that you have done work related the required position or not.</h4>''',
                             unsafe_allow_html=True)
 
-                st.subheader("**Resume Score📝**")
-                st.markdown(
-                    """
-                    <style>
-                        .stProgress > div > div > div > div {
+                    st.subheader("**Resume Score📝**")
+                    st.markdown(
+                        """
+                        <style>
+                            .stProgress > div > div > div > div {
                             background-color: #d73b5c;
-                        }
-                    </style>""",
+                            }
+                        </style>""",
                     unsafe_allow_html=True,
                 )
                 my_bar = st.progress(0)
