@@ -176,32 +176,34 @@ def run():
 
 # Parse the saveimport spacy
             # Read text from PDF
-               from pdfminer.high_level import extract_text
-               resume_text = extract_text(save_path)
+                       # ────────────────
+        # Extract text from the saved PDF
+        # ────────────────
+        from pdfminer.high_level import extract_text
 
-# Simple parsing
-               resume_data = simple_parse(resume_text)
+        resume_text = extract_text(save_path)
+
+        # ────────────────
+        # Simple parsing
+        # ────────────────
+        resume_data = simple_parse(resume_text)
+
+        # ────────────────
+        # Display the parsed info
+        # ────────────────
+        st.subheader("📌 Extracted Resume Info")
+        st.text("Name: " + resume_data.get("name", "Not found"))
+        st.text("Email: " + resume_data.get("email", "Not found"))
+        st.text("Phone: " + resume_data.get("phone", "Not found"))
+        st.text("Skills: " + ", ".join(resume_data.get("skills", [])))
+
+        # Optional confirmation message
+        if resume_data:
+            st.success("Resume parsed successfully!")
 
 # display the parsed info
-               st.text("Name: " + resume_data.get("name", ""))
-               st.text("Email: " + resume_data.get("email", ""))
-               st.text("Phone: " + resume_data.get("phone", ""))
-               st.text("Skills: " + ", ".join(resume_data.get("skills", [])))
-               if resume_data:
-                   from pdfminer.high_level import extract_text
-
-                   resume_text = extract_text(save_image_path)
-
-                   st.header("**Resume Analysis**")
-                   st.success("Hello " + resume_data['name'])
-                   st.subheader("**Your Basic info**")
-                   try:
-                      st.text('Name: ' + resume_data['name'])
-                      st.text('Email: ' + resume_data['email'])
-                      st.text('Contact: ' + resume_data['mobile_number'])
-                      st.text('Resume pages: ' + str(resume_data['no_of_pages']))
-                   except:
-                      pass
+              
+               
                    cand_level = ''
             if resume_data['no_of_pages'] == 1:
                     cand_level = "Fresher"
