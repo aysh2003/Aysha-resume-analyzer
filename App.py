@@ -511,7 +511,6 @@ def run():
     else:
         
     ## Admin Side Without Database
-           else:
                st.success("WELCOME TO ADMIN SIDE")
 
                ad_user = st.text_input("Admin Username")
