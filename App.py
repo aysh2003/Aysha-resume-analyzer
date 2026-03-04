@@ -484,7 +484,7 @@ def run():
 
                         connection.commit()
             else:
-                             st.error('Something went wrong..')
+                st.error('Something went wrong..')
     else:
         ## Admin Side
         st.success('Welcome to Admin Side')
