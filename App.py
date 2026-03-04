@@ -398,8 +398,8 @@ def run():
                         </style>""",
                     unsafe_allow_html=True,
                 )
-                my_bar = st.progress(0)
-                score = 0
+                    my_bar = st.progress(0)
+                    score = 0
                 for percent_complete in range(resume_score):
                     score += 1
                     time.sleep(0.1)
