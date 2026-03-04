@@ -401,13 +401,13 @@ def run():
                     my_bar = st.progress(0)
                     score = 0
                     for percent_complete in range(resume_score):
-                    score += 1
-                    time.sleep(0.1)
-                    my_bar.progress(percent_complete + 1)
-                st.success('** Your Resume Writing Score: ' + str(score) + '**')
-                st.warning(
-                    "** Note: This score is calculated based on the content that you have added in your Resume. **")
-                st.balloons()
+                         score += 1
+                         time.sleep(0.1)
+                         my_bar.progress(percent_complete + 1)
+                    st.success('** Your Resume Writing Score: ' + str(score) + '**')
+                    st.warning(
+                         "** Note: This score is calculated based on the content that you have added in your Resume. **")
+                    st.balloons()
 
                 insert_data(resume_data['name'], resume_data['email'], str(resume_score), timestamp,
                             str(resume_data['no_of_pages']), reco_field, cand_level, str(resume_data['skills']),
