@@ -218,28 +218,28 @@ def run():
 # Safely get skills
             skills_list = resume_data.get("skills", [])
 
-if not skills_list:
-    st.warning("No skills were detected in your resume yet — we couldn’t recommend anything.")
-else:
+            if not skills_list:
+                st.warning("No skills were detected in your resume yet — we couldn’t recommend anything.")
+            else:
     # Display existing skills as tags
-    keywords = st_tags(
-        label='### Skills that you have',
-        text='See our skills recommendation',
-        value=skills_list,
-        suggestions=[],
-        key='1'
-    )
+                keywords = st_tags(
+                label='### Skills that you have',
+                text='See our skills recommendation',
+                value=skills_list,
+                suggestions=[],
+                key='1'
+                )
 
     # Define skill categories
-    ds_keyword = ['tensorflow', 'keras', 'pytorch', 'machine learning', 'deep learning', 'flask', 'streamlit']
-    web_keyword = ['react', 'django', 'node js', 'php', 'laravel', 'magento', 'wordpress', 'javascript', 'angular js', 'c#']
-    android_keyword = ['android', 'android development', 'flutter', 'kotlin', 'xml', 'kivy']
-    ios_keyword = ['ios', 'ios development', 'swift', 'cocoa', 'xcode']
-    uiux_keyword = ['ux', 'figma', 'adobe xd', 'wireframes', 'user experience']
+             ds_keyword = ['tensorflow', 'keras', 'pytorch', 'machine learning', 'deep learning', 'flask', 'streamlit']
+             web_keyword = ['react', 'django', 'node js', 'php', 'laravel', 'magento', 'wordpress', 'javascript', 'angular js', 'c#']
+             android_keyword = ['android', 'android development', 'flutter', 'kotlin', 'xml', 'kivy']
+             ios_keyword = ['ios', 'ios development', 'swift', 'cocoa', 'xcode']
+             uiux_keyword = ['ux', 'figma', 'adobe xd', 'wireframes', 'user experience']
 
-    recommended_skills = []
-    reco_field = ''
-    rec_course = []  # make this a list
+             recommended_skills = []
+             reco_field = ''
+             rec_course = []  # make this a list
 
     # Categorize based on found skills
     for skill in skills_list:
