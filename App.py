@@ -341,7 +341,7 @@ def run():
                     st.markdown(
                         '''<h4 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added Objective</h4>''',
                         unsafe_allow_html=True)
-                    else:
+                else:
                     st.markdown(
                         '''<h4 style='text-align: left; color: #fabc10;'>[-] According to our recommendation please add your career objective, it will give your career intension to the Recruiters.</h4>''',
                         unsafe_allow_html=True)
