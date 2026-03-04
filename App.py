@@ -174,32 +174,28 @@ def run():
                img = Image.frombytes("RGB", [pix.width, pix.height], pix.samples)
                st.image(img, caption=f"Page {page_number+1}", use_column_width=True)
 
-# Parse the saveimport spacy
-            # Read text from PDF
-                       # ────────────────
-        # Extract text from the saved PDF
-        # ────────────────
-        from pdfminer.high_level import extract_text
 
-        resume_text = extract_text(save_path)
+            from pdfminer.high_level import extract_text
+
+            resume_text = extract_text(save_path)
 
         # ────────────────
         # Simple parsing
         # ────────────────
-        resume_data = simple_parse(resume_text)
+            resume_data = simple_parse(resume_text)
 
         # ────────────────
         # Display the parsed info
         # ────────────────
-        st.subheader("📌 Extracted Resume Info")
-        st.text("Name: " + resume_data.get("name", "Not found"))
-        st.text("Email: " + resume_data.get("email", "Not found"))
-        st.text("Phone: " + resume_data.get("phone", "Not found"))
-        st.text("Skills: " + ", ".join(resume_data.get("skills", [])))
+            st.subheader("📌 Extracted Resume Info")
+            st.text("Name: " + resume_data.get("name", "Not found"))
+            st.text("Email: " + resume_data.get("email", "Not found"))
+            st.text("Phone: " + resume_data.get("phone", "Not found"))
+            st.text("Skills: " + ", ".join(resume_data.get("skills", [])))
 
         # Optional confirmation message
-        if resume_data:
-            st.success("Resume parsed successfully!")
+            if resume_data:
+                st.success("Resume parsed successfully!")
 
 # display the parsed info
               
