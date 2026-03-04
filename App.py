@@ -350,19 +350,19 @@ def run():
 
                     if 'Declaration' in resume_text:
                         resume_score = resume_score + 20
-                    st.markdown(
-                        '''<h4 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added Delcaration✍/h4>''',
-                        unsafe_allow_html=True)
+                        st.markdown(
+                            '''<h4 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added Delcaration✍/h4>''',
+                            unsafe_allow_html=True)
                     else:
-                    st.markdown(
-                        '''<h4 style='text-align: left; color: #fabc10;'>[-] According to our recommendation please add Declaration✍. It will give the assurance that everything written on your resume is true and fully acknowledged by you</h4>''',
-                        unsafe_allow_html=True)
+                        st.markdown(
+                            '''<h4 style='text-align: left; color: #fabc10;'>[-] According to our recommendation please add Declaration✍. It will give the assurance that everything written on your resume is true and fully acknowledged by you</h4>''',
+                            unsafe_allow_html=True)
 
                     if 'Hobbies' or 'Interests' in resume_text:
                         resume_score = resume_score + 20
-                    st.markdown(
-                        '''<h4 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added your Hobbies⚽</h4>''',
-                        unsafe_allow_html=True)
+                        st.markdown(
+                            '''<h4 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added your Hobbies⚽</h4>''',
+                            unsafe_allow_html=True)
                     else:
                     st.markdown(
                         '''<h4 style='text-align: left; color: #fabc10;'>[-] According to our recommendation please add Hobbies⚽. It will show your persnality to the Recruiters and give the assurance that you are fit for this role or not.</h4>''',
