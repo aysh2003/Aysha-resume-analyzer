@@ -485,20 +485,22 @@ def run():
                         if resume_score >= 80:
                             st.balloons()
                         # After resume scoring and before admin section
-                        supabase.table("resumes").insert({
-                            "name": resume_data.get("name", ""),
-                            "email": resume_data.get("email", ""),
-                            "resume_score": resume_score,
-                            "timestamp": timestamp,
-                            "page_count": len(doc) if 'doc' in locals() else 0,
-                            "predicted_field": reco_field,
-                            "user_level": cand_level,
-                            "skills": "; ".join(resume_data.get("skills", [])),
-                            "recommended_skills": "; ".join(recommended_skills),
-                            "recommended_courses": "; ".join(rec_course)
+                        # Insert into Supabase and capture the response
+                        res = supabase.table("resumes").insert({
+                             "name": resume_data.get("name", ""),
+                             "email": resume_data.get("email", ""),
+                             "resume_score": resume_score,
+                             "timestamp": timestamp,
+                             "page_count": len(doc) if 'doc' in locals() else 0,
+                             "predicted_field": reco_field,
+                             "user_level": cand_level,
+                             "skills": "; ".join(resume_data.get("skills", [])),
+                             "recommended_skills": "; ".join(recommended_skills),
+                             "recommended_courses": "; ".join(rec_course)
                         }).execute()
-                        
-                        st.write(res)
+
+# Display response from Supabase
+                        st.write("Supabase Insert Response:", res)
     else:
         
     ## Admin Side Without Database
