@@ -555,7 +555,7 @@ def run():
                           )
                           st.plotly_chart(fig2)
 
-                 except FileNotFoundError:
+                except FileNotFoundError:
                           st.error("No resume_data.csv found — please upload a resume first.")
 
                else:
