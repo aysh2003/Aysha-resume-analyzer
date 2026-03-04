@@ -284,7 +284,7 @@ else:
     else:
         st.info("We could not identify a matching job category from your skills yet.")
                 ## Courses recommendation
-            for i in resume_data['skills']:
+        for i in resume_data['skills']:
                     ## Data science recommendation
                     if i.lower() in ds_keyword:
                         print(i.lower())
