@@ -380,112 +380,112 @@ def run():
 
                 ### Resume writing recommendation
                         # === Resume writing recommendation
-st.subheader("**Resume Tips & Ideas💡**")
+                        st.subheader("**Resume Tips & Ideas💡**")
 
-resume_score = 0
+                        resume_score = 0
 
 # Objective
-if 'Objective' in resume_text:
-    resume_score += 20
-    st.markdown(
-        "<h4 style='text-align: left; color: #1ed760;'>[+] Objective section detected!</h4>",
-        unsafe_allow_html=True
-    )
-else:
-    st.markdown(
-        "<h4 style='text-align: left; color: #fabc10;'>[-] Add a career objective — it helps the recruiter understand your goals.</h4>",
-        unsafe_allow_html=True
-    )
+                        if 'Objective' in resume_text:
+                             resume_score += 20
+                             st.markdown(
+                                  "<h4 style='text-align: left; color: #1ed760;'>[+] Objective section detected!</h4>",
+                                  unsafe_allow_html=True
+                                 )
+                        else:
+                             st.markdown(
+                                  "<h4 style='text-align: left; color: #fabc10;'>[-] Add a career objective — it helps the recruiter understand your goals.</h4>",
+                                  unsafe_allow_html=True
+                                 )
 
 # Declaration
-if 'Declaration' in resume_text:
-    resume_score += 20
-    st.markdown(
-        "<h4 style='text-align: left; color: #1ed760;'>[+] Declaration section present!</h4>",
-        unsafe_allow_html=True
-    )
-else:
-    st.markdown(
-        "<h4 style='text-align: left; color: #fabc10;'>[-] Add a declaration for authenticity.</h4>",
-        unsafe_allow_html=True
-    )
+                        if 'Declaration' in resume_text:
+                             resume_score += 20
+                             st.markdown(
+                                  "<h4 style='text-align: left; color: #1ed760;'>[+] Declaration section present!</h4>",
+                                  unsafe_allow_html=True
+                                 )
+                        else:
+                             st.markdown(
+                                  "<h4 style='text-align: left; color: #fabc10;'>[-] Add a declaration for authenticity.</h4>",
+                                  unsafe_allow_html=True
+                                 )
 
 # Hobbies/Interests
-if 'Hobbies' in resume_text or 'Interests' in resume_text:
-    resume_score += 20
-    st.markdown(
-        "<h4 style='text-align: left; color: #1ed760;'>[+] Hobbies / Interests found!</h4>",
-        unsafe_allow_html=True
-    )
-else:
-    st.markdown(
-        "<h4 style='text-align: left; color: #fabc10;'>[-] Consider adding hobbies or interests.</h4>",
-        unsafe_allow_html=True
-    )
+                        if 'Hobbies' in resume_text or 'Interests' in resume_text:
+                             resume_score += 20
+                             st.markdown(
+                                  "<h4 style='text-align: left; color: #1ed760;'>[+] Hobbies / Interests found!</h4>",
+                                  unsafe_allow_html=True
+                                 )
+                        else:
+                             st.markdown(
+                                  "<h4 style='text-align: left; color: #fabc10;'>[-] Consider adding hobbies or interests.</h4>",
+                                  unsafe_allow_html=True
+                                 )
 
 # Achievements
-if 'Achievements' in resume_text:
-    resume_score += 20
-    st.markdown(
-        "<h4 style='text-align: left; color: #1ed760;'>[+] Achievements listed!</h4>",
-        unsafe_allow_html=True
-    )
-else:
-    st.markdown(
-        "<h4 style='text-align: left; color: #fabc10;'>[-] Add achievements to highlight your accomplishments.</h4>",
-        unsafe_allow_html=True
-    )
+                        if 'Achievements' in resume_text:
+                             resume_score += 20
+                             st.markdown(
+                                  "<h4 style='text-align: left; color: #1ed760;'>[+] Achievements listed!</h4>",
+                                  unsafe_allow_html=True
+                                 )
+                        else:
+                             st.markdown(
+                                  "<h4 style='text-align: left; color: #fabc10;'>[-] Add achievements to highlight your accomplishments.</h4>",
+                                  unsafe_allow_html=True
+                                 )
 
 # Projects
-if 'Projects' in resume_text:
-    resume_score += 20
-    st.markdown(
-        "<h4 style='text-align: left; color: #1ed760;'>[+] Projects are included!</h4>",
-        unsafe_allow_html=True
-    )
-else:
-    st.markdown(
-        "<h4 style='text-align: left; color: #fabc10;'>[-] Add Projects to show practical work.</h4>",
-        unsafe_allow_html=True
-    )
+                        if 'Projects' in resume_text:
+                             resume_score += 20
+                             st.markdown(
+                                  "<h4 style='text-align: left; color: #1ed760;'>[+] Projects are included!</h4>",
+                                   unsafe_allow_html=True
+                                 )
+                        else:
+                             st.markdown(
+                                  "<h4 style='text-align: left; color: #fabc10;'>[-] Add Projects to show practical work.</h4>",
+                                  unsafe_allow_html=True
+                                 )
 
 # === Resume Score UI
-st.subheader("**Resume Score📝**")
-st.markdown(
-    """
-    <style>
-        .stProgress > div > div > div > div {
-            background-color: #d73b5c;
-        }
-    </style>
-    """,
-    unsafe_allow_html=True,
-)
+                        st.subheader("**Resume Score📝**")
+                        st.markdown(
+                           """
+                           <style>
+                              .stProgress > div > div > div > div {
+                              background-color: #d73b5c;
+                              }
+                           </style>
+                           """,
+                           unsafe_allow_html=True,
+                           )
 
 # Progress bar
-my_bar = st.progress(0)
-for percent_complete in range(resume_score + 1):
-    time.sleep(0.02)
-    my_bar.progress(percent_complete)
+                        my_bar = st.progress(0)
+                        for percent_complete in range(resume_score + 1):
+                              time.sleep(0.02)
+                              my_bar.progress(percent_complete)
 
 # Show final score
-st.success(f"** Your Resume Writing Score: {resume_score} **")
-st.warning("** Note: This score is calculated based on the content found in your Resume. **")
+                        st.success(f"** Your Resume Writing Score: {resume_score} **")
+                        st.warning("** Note: This score is calculated based on the content found in your Resume. **")
 
 # 🎉 Balloons celebration
-if resume_score >= 80:
-    st.balloons()
+                        if resume_score >= 80:
+                            st.balloons()
 
-    insert_data(resume_data['name'], resume_data['email'], str(resume_score), timestamp,
-        str(resume_data['no_of_pages']), reco_field, cand_level, str(resume_data['skills']),
-        str(recommended_skills), str(rec_course))
+                        insert_data(resume_data['name'], resume_data['email'], str(resume_score), timestamp,
+                          str(resume_data['no_of_pages']), reco_field, cand_level, str(resume_data['skills']),
+                          str(recommended_skills), str(rec_course))
 
                
 
-    connection.commit()
-else:
-        st.error('Something went wrong..')
-        else:
+                        connection.commit()
+                        else:
+                             st.error('Something went wrong..')
+ else:
         ## Admin Side
         st.success('Welcome to Admin Side')
         # st.sidebar.subheader('**ID / Password Required!**')
