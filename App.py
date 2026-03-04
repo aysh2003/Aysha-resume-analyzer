@@ -281,7 +281,7 @@ def run():
                 if rec_course:
                    st.subheader("📚 Recommended Courses & Certificates")
                    course_recommender(rec_course)
-               else:
+                else:
                    st.info("We could not identify a matching job category from your skills yet.")
                 ## Courses recommendation
             for i in resume_data['skills']:
