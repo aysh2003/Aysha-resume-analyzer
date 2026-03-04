@@ -511,59 +511,54 @@ def run():
     else:
         
     ## Admin Side Without Database
-           st.success("Welcome to Admin Side")
+           else:
+               st.success("WELCOME TO ADMIN SIDE")
 
-           ad_user = st.text_input("Username")
-           ad_password = st.text_input("Password", type="password")
+               ad_user = st.text_input("Admin Username")
+               ad_password = st.text_input("Admin Password", type="password")
 
-    if st.button("Login"):
-        if ad_user == 'aysha' and ad_password == 'admin123':
-            st.success("Welcome Aysha!")
+               if st.button("Login"):
+                 if ad_user == 'aysha' and ad_password == 'admin123':
+                   st.success("Welcome Aysha!")
 
-            # Try loading the CSV data
-            try:
-                import pandas as pd
+                   try:
+                      import pandas as pd
 
-                df = pd.read_csv("resume_data.csv")
+                      df = pd.read_csv("resume_data.csv")
+                      st.header("📋 All Resume Records")
+                      st.dataframe(df)
 
-                st.header("**User Data Table👨‍💻**")
-                st.dataframe(df)
+                # Download button
+                      st.download_button(
+                          label="📥 Download CSV",
+                          data=df.to_csv(index=False).encode("utf-8"),
+                          file_name="User_Data_Report.csv",
+                          mime="text/csv"
+                      )
 
-                # Download button (CSV)
-                csv_data = df.to_csv(index=False).encode('utf-8')
-                st.download_button(
-                    label="Download Report as CSV",
-                    data=csv_data,
-                    file_name="User_Data_Report.csv",
-                    mime="text/csv"
-                )
+                # Pie chart — Predicted Field
+                     if "Predicted Field" in df.columns:
+                          st.subheader("📈 Predicted Field Distribution")
+                          fig1 = px.pie(
+                              df, 
+                              names="Predicted Field",
+                              title="Predicted Field distribution"
+                          )
+                          st.plotly_chart(fig1)
 
-                # Pie chart for Predicted Field (if exists)
-                if "Predicted Field" in df.columns:
-                    st.subheader("📈 Prediction Field Distribution")
-                    fig1 = px.pie(
-                        df,
-                        values=df["Predicted Field"].value_counts(),
-                        names=df["Predicted Field"],
-                        title="Predicted Field distribution from Skills"
-                    )
-                    st.plotly_chart(fig1)
+                # Pie chart — User Level
+                     if "User Level" in df.columns:
+                          st.subheader("📈 User Level Distribution")
+                          fig2 = px.pie(
+                              df,
+                              names="User Level",
+                              title="User Level distribution"
+                          )
+                          st.plotly_chart(fig2)
 
-                # Pie chart for User Level
-                if "User Level" in df.columns:
-                    st.subheader("📈 User Experience Level Distribution")
-                    fig2 = px.pie(
-                        df,
-                        values=df["User Level"].value_counts(),
-                        names=df["User Level"],
-                        title="User Experience level distribution"
-                    )
-                    st.plotly_chart(fig2)
+                 except FileNotFoundError:
+                          st.error("No resume_data.csv found — please upload a resume first.")
 
-            except FileNotFoundError:
-                st.error("No saved resume data found (resume_data.csv).")
-
-        else:
-            st.error("Wrong Admin Credentials")
-
+               else:
+                          st.error("Wrong Admin Credentials")
 run()
