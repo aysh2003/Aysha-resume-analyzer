@@ -477,9 +477,35 @@ def run():
                         if resume_score >= 80:
                             st.balloons()
 
-                        insert_data(resume_data['name'], resume_data['email'], str(resume_score), timestamp,
-                          str(resume_data['no_of_pages']), reco_field, cand_level, str(resume_data['skills']),
-                          str(recommended_skills), str(rec_course))
+                        import csv
+                        import os
+
+                        csv_file = "resume_data.csv"
+                        file_exists = os.path.exists(csv_file)
+
+                        with open(csv_file, "a", newline="", encoding="utf-8") as f:
+                            writer = csv.writer(f)
+    
+    # Write header if file did not exist
+                            if not file_exists:
+                                writer.writerow([
+                                     "Name", "Email", "Resume Score", "Timestamp", "Page Count",
+                                     "Predicted Field", "User Level", "Actual Skills",
+                                     "Recommended Skills", "Recommended Courses"
+                                ])
+    
+                            writer.writerow([
+                                resume_data.get("name", ""),
+                                resume_data.get("email", ""),
+                                resume_score,
+                                timestamp,
+                                len(doc) if 'doc' in locals() else "",
+                                reco_field,
+                                cand_level,
+                                "; ".join(resume_data.get("skills", [])),
+                                "; ".join(recommended_skills),
+                                "; ".join(rec_course),
+                           ])
 
                
 
