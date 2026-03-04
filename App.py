@@ -536,7 +536,7 @@ def run():
                       )
 
                 # Pie chart — Predicted Field
-                     if "Predicted Field" in df.columns:
+                      if "Predicted Field" in df.columns:
                           st.subheader("📈 Predicted Field Distribution")
                           fig1 = px.pie(
                               df, 
@@ -546,7 +546,7 @@ def run():
                           st.plotly_chart(fig1)
 
                 # Pie chart — User Level
-                     if "User Level" in df.columns:
+                      if "User Level" in df.columns:
                           st.subheader("📈 User Level Distribution")
                           fig2 = px.pie(
                               df,
