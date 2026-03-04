@@ -340,13 +340,13 @@ def run():
                         resume_score = 0
                     if 'Objective' in resume_text:
                         resume_score = resume_score + 20
-                    st.markdown(
-                        '''<h4 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added Objective</h4>''',
-                        unsafe_allow_html=True)
+                        st.markdown(
+                            '''<h4 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added Objective</h4>''',
+                            unsafe_allow_html=True)
                     else:
-                    st.markdown(
-                        '''<h4 style='text-align: left; color: #fabc10;'>[-] According to our recommendation please add your career objective, it will give your career intension to the Recruiters.</h4>''',
-                        unsafe_allow_html=True)
+                        st.markdown(
+                            '''<h4 style='text-align: left; color: #fabc10;'>[-] According to our recommendation please add your career objective, it will give your career intension to the Recruiters.</h4>''',
+                            unsafe_allow_html=True)
 
                     if 'Declaration' in resume_text:
                         resume_score = resume_score + 20
