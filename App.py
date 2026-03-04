@@ -487,47 +487,61 @@ def run():
             else:
                 st.error('Something went wrong..')
     else:
-        ## Admin Side
-        st.success('Welcome to Admin Side')
-        # st.sidebar.subheader('**ID / Password Required!**')
+        
+    ## Admin Side Without Database
+           st.success("Welcome to Admin Side")
 
-        ad_user = st.text_input("Username")
-        ad_password = st.text_input("Password", type='password')
-        if st.button('Login'):
-            if ad_user == 'aysha' and ad_password == 'admin123':
-                st.success("Welcome Aysha!")
-                # Display Data
-                cursor.execute('''SELECT*FROM user_data''')
-                data = cursor.fetchall()
-                st.header("**User's👨‍💻 Data**")
-                df = pd.DataFrame(data, columns=['ID', 'Name', 'Email', 'Resume Score', 'Timestamp', 'Total Page',
-                                                 'Predicted Field', 'User Level', 'Actual Skills', 'Recommended Skills',
-                                                 'Recommended Course'])
+           ad_user = st.text_input("Username")
+           ad_password = st.text_input("Password", type="password")
+
+    if st.button("Login"):
+        if ad_user == 'aysha' and ad_password == 'admin123':
+            st.success("Welcome Aysha!")
+
+            # Try loading the CSV data
+            try:
+                import pandas as pd
+
+                df = pd.read_csv("resume_data.csv")
+
+                st.header("**User Data Table👨‍💻**")
                 st.dataframe(df)
-                st.markdown(get_table_download_link(df, 'User_Data.csv', 'Download Report'), unsafe_allow_html=True)
-                ## Admin Side Data
-                query = 'select * from user_data;'
-                plot_data = pd.read_sql(query, connection)
 
-                ## Pie chart for predicted field recommendations
-                labels = plot_data.Predicted_Field.unique()
-                print(labels)
-                values = plot_data.Predicted_Field.value_counts()
-                print(values)
-                st.subheader("📈 Pie-Chart for Predicted Field Recommendations")
-                fig = px.pie(df, values=values, names=labels, title='Predicted Field according to the Skills')
-                st.plotly_chart(fig)
+                # Download button (CSV)
+                csv_data = df.to_csv(index=False).encode('utf-8')
+                st.download_button(
+                    label="Download Report as CSV",
+                    data=csv_data,
+                    file_name="User_Data_Report.csv",
+                    mime="text/csv"
+                )
 
-                ### Pie chart for User's👨‍💻 Experienced Level
-                labels = plot_data.User_level.unique()
-                values = plot_data.User_level.value_counts()
-                st.subheader("📈 Pie-Chart for User's👨‍💻 Experienced Level")
-                fig = px.pie(df, values=values, names=labels, title="Pie-Chart📈 for User's👨‍💻 Experienced Level")
-                st.plotly_chart(fig)
+                # Pie chart for Predicted Field (if exists)
+                if "Predicted Field" in df.columns:
+                    st.subheader("📈 Prediction Field Distribution")
+                    fig1 = px.pie(
+                        df,
+                        values=df["Predicted Field"].value_counts(),
+                        names=df["Predicted Field"],
+                        title="Predicted Field distribution from Skills"
+                    )
+                    st.plotly_chart(fig1)
 
+                # Pie chart for User Level
+                if "User Level" in df.columns:
+                    st.subheader("📈 User Experience Level Distribution")
+                    fig2 = px.pie(
+                        df,
+                        values=df["User Level"].value_counts(),
+                        names=df["User Level"],
+                        title="User Experience level distribution"
+                    )
+                    st.plotly_chart(fig2)
 
-            else:
-                st.error("Wrong ID & Password Provided")
+            except FileNotFoundError:
+                st.error("No saved resume data found (resume_data.csv).")
 
+        else:
+            st.error("Wrong Admin Credentials")
 
 run()
