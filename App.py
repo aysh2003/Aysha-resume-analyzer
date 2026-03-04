@@ -341,47 +341,47 @@ def run():
                     st.markdown(
                         '''<h4 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added Objective</h4>''',
                         unsafe_allow_html=True)
-                else:
+                    else:
                     st.markdown(
                         '''<h4 style='text-align: left; color: #fabc10;'>[-] According to our recommendation please add your career objective, it will give your career intension to the Recruiters.</h4>''',
                         unsafe_allow_html=True)
 
-                if 'Declaration' in resume_text:
-                    resume_score = resume_score + 20
+                    if 'Declaration' in resume_text:
+                        resume_score = resume_score + 20
                     st.markdown(
                         '''<h4 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added Delcaration✍/h4>''',
                         unsafe_allow_html=True)
-                else:
+                    else:
                     st.markdown(
                         '''<h4 style='text-align: left; color: #fabc10;'>[-] According to our recommendation please add Declaration✍. It will give the assurance that everything written on your resume is true and fully acknowledged by you</h4>''',
                         unsafe_allow_html=True)
 
-                if 'Hobbies' or 'Interests' in resume_text:
-                    resume_score = resume_score + 20
+                    if 'Hobbies' or 'Interests' in resume_text:
+                        resume_score = resume_score + 20
                     st.markdown(
                         '''<h4 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added your Hobbies⚽</h4>''',
                         unsafe_allow_html=True)
-                else:
+                    else:
                     st.markdown(
                         '''<h4 style='text-align: left; color: #fabc10;'>[-] According to our recommendation please add Hobbies⚽. It will show your persnality to the Recruiters and give the assurance that you are fit for this role or not.</h4>''',
                         unsafe_allow_html=True)
 
-                if 'Achievements' in resume_text:
-                    resume_score = resume_score + 20
+                    if 'Achievements' in resume_text:
+                        resume_score = resume_score + 20
                     st.markdown(
                         '''<h4 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added your Achievements🏅 </h4>''',
                         unsafe_allow_html=True)
-                else:
+                    else:
                     st.markdown(
                         '''<h4 style='text-align: left; color: #fabc10;'>[-] According to our recommendation please add Achievements🏅. It will show that you are capable for the required position.</h4>''',
                         unsafe_allow_html=True)
 
-                if 'Projects' in resume_text:
-                    resume_score = resume_score + 20
+                    if 'Projects' in resume_text:
+                        resume_score = resume_score + 20
                     st.markdown(
                         '''<h4 style='text-align: left; color: #1ed760;'>[+] Awesome! You have added your Projects👨‍💻 </h4>''',
                         unsafe_allow_html=True)
-                else:
+                    else:
                     st.markdown(
                         '''<h4 style='text-align: left; color: #fabc10;'>[-] According to our recommendation please add Projects👨‍💻. It will show that you have done work related the required position or not.</h4>''',
                         unsafe_allow_html=True)
