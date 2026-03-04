@@ -248,7 +248,7 @@ def run():
                 reco_field = 'Data Science'
                 recommended_skills = ['Machine Learning', 'Deep Learning', 'Tensorflow', 'Keras', 'Scikit-learn']
                 rec_course = ds_course
-            break
+                break
             elif s in web_keyword:
                 reco_field = 'Web Development'
                 recommended_skills = ['React', 'Django', 'Node JS', 'JavaScript']
