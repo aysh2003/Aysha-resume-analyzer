@@ -500,7 +500,11 @@ def run():
                         }).execute()
 
 # Display response from Supabase
-                        st.write("Supabase Insert Response:", res)
+                        st.write(res)
+
+# Debug: immediately fetch all resumes to see if insert worked
+                        data = supabase.table("resumes").select("*").execute()
+                        st.write(data)
     else:
         
     ## Admin Side Without Database
