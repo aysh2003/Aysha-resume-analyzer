@@ -391,7 +391,7 @@ def run():
                     "predicted_field": reco_field,
                     "user_level": cand_level,
                     "skills": "; ".join(resume_data.get("skills",[])),
-                    "recommended_skills": "; ".join(recommended_skills),
+                    "recommended_skills": "; ".join(recommended_skills) if recommended_skills else "None",
                     "recommended_courses": str(rec_course)
 
                 }).execute()
