@@ -245,8 +245,10 @@ def run():
                     ios_keyword = ['ios','ios development','swift','cocoa','xcode']
                     uiux_keyword = ['ux','figma','adobe xd','wireframes','user experience']
 
+                    skills_list = resume_data.get("skills", [])
+
                     recommended_skills = []
-                    reco_field = ''
+                    reco_field = "Unknown"
                     rec_course = []
 
                     for skill in skills_list:
