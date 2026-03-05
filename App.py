@@ -286,7 +286,7 @@ def run():
                             break
 
 
-                    if reco_field:
+                    if reco_field != "Unknown":
                         st.success(f"Our analysis says you are looking for **{reco_field} Jobs**")
 
                         st.text("Suggested skills to add:")
@@ -368,7 +368,7 @@ def run():
                 st.success(f"Your Resume Writing Score: **{resume_score}**")
                 st.warning("This score is calculated based on resume content.")
 
-                if resume_score >= 20:
+                if resume_score >= 80:
                     st.balloons()
     # ===============================
     # Insert into Supabase
