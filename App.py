@@ -481,30 +481,32 @@ def run():
                         st.success(f"** Your Resume Writing Score: {resume_score} **")
                         st.warning("** Note: This score is calculated based on the content found in your Resume. **")
 
-# 🎉 Balloons celebration
                         if resume_score >= 80:
                             st.balloons()
-                        # After resume scoring and before admin section
-                        # Insert into Supabase and capture the response
-                        # Insert into Supabase and capture the response
+
+# Create timestamp
+                        ts = time.time()
+                        cur_date = datetime.datetime.fromtimestamp(ts).strftime('%Y-%m-%d')
+                        cur_time = datetime.datetime.fromtimestamp(ts).strftime('%H:%M:%S')
+                        timestamp = str(cur_date + '_' + cur_time)
+
+# Insert into Supabase
                         res = supabase.table("resumes").insert({
-                             "name": resume_data.get("name", ""),
-                             "email": resume_data.get("email", ""),
-                             "resume_score": resume_score,
-                             "timestamp": timestamp,
-                             "page_count": len(doc) if 'doc' in locals() else 0,
-                             "predicted_field": reco_field,
-                             "user_level": cand_level,
-                             "skills": "; ".join(resume_data.get("skills", [])),
-                             "recommended_skills": "; ".join(recommended_skills),
-                             "recommended_courses": "; ".join(rec_course)
+                            "name": resume_data.get("name", ""),
+                            "email": resume_data.get("email", ""),
+                            "resume_score": resume_score,
+                            "timestamp": timestamp,
+                            "page_count": len(doc) if 'doc' in locals() else 0,
+                            "predicted_field": reco_field,
+                            "user_level": cand_level,
+                            "skills": "; ".join(resume_data.get("skills", [])),
+                            "recommended_skills": "; ".join(recommended_skills),
+                            "recommended_courses": str(rec_course)
                         }).execute()
 
-# Debug: show what Supabase returns after insert
                         st.subheader("Insert Response")
                         st.write(res)
 
-# Immediately fetch all resumes to see if the insert worked
                         data = supabase.table("resumes").select("*").execute()
                         st.subheader("Fetch All Resumes")
                         st.write(data)
