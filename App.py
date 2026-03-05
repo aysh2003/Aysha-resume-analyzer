@@ -224,7 +224,7 @@ def run():
             st.text("Name: " + resume_data.get("name", "Not found"))
             st.text("Email: " + resume_data.get("email", "Not found"))
             st.text("Phone: " + resume_data.get("phone", "Not found"))
-            st.write("Skills:", resume_data.get("skills", []))
+            st.text("Skills: " + ", ".join(resume_data.get("skills", [])))
 
         # Optional confirmation message
             if resume_data:
