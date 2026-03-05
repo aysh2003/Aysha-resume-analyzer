@@ -366,7 +366,7 @@ def run():
                 st.success(f"Your Resume Writing Score: **{resume_score}**")
                 st.warning("This score is calculated based on resume content.")
 
-                if resume_score >= 80:
+                if resume_score >= 20:
                     st.balloons()
     # ===============================
     # Insert into Supabase
