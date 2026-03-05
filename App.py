@@ -244,12 +244,13 @@ def run():
                     android_keyword = ['android','android development','flutter','kotlin','xml','kivy']
                     ios_keyword = ['ios','ios development','swift','cocoa','xcode']
                     uiux_keyword = ['ux','figma','adobe xd','wireframes','user experience']
+# DEFAULT VALUES (important to avoid UnboundLocalError)
+                    reco_field = "Unknown"
+                    recommended_skills = []
+                    rec_course = []
 
                     skills_list = resume_data.get("skills", [])
 
-                    recommended_skills = []
-                    reco_field = "Unknown"
-                    rec_course = []
 
                     for skill in skills_list:
 
