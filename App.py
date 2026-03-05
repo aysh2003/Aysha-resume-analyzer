@@ -362,17 +362,26 @@ def run():
                 </style>
                 """, unsafe_allow_html=True)
 
+# Progress bar animation
                 my_bar = st.progress(0)
 
                 for percent_complete in range(resume_score + 1):
                     time.sleep(0.02)
                     my_bar.progress(percent_complete)
 
-                st.success(f"Your Resume Writing Score: **{resume_score}**")
-                st.warning("This score is calculated based on resume content.")
+# Score display with colors
+                if resume_score < 20:
+                    st.error(f"Your Resume Writing Score: **{resume_score}**")
+                    st.warning("Your resume needs improvement. Add more sections.")
 
-                if resume_score >= 80:
+                elif 20 <= resume_score < 40:
+                    st.warning(f"Your Resume Writing Score: **{resume_score}**")
+                    st.info("Good start! Try adding more sections like Projects or Achievements.")
+
+                else:
+                    st.success(f"Your Resume Writing Score: **{resume_score}**")
                     st.balloons()
+                    st.success("Excellent! Your resume is well structured 🎉")
     # ===============================
     # Insert into Supabase
     # ===============================
