@@ -135,6 +135,10 @@ st.set_page_config(
 
 
 def run():
+    reco_field = "Unknown"
+    recommended_skills = []
+    rec_course = []
+    
     st.title("Smart Resume Analyser")
     st.sidebar.markdown("# Choose User")
     activities = ["User", "Admin"]
@@ -245,9 +249,7 @@ def run():
                     ios_keyword = ['ios','ios development','swift','cocoa','xcode']
                     uiux_keyword = ['ux','figma','adobe xd','wireframes','user experience']
 # DEFAULT VALUES (important to avoid UnboundLocalError)
-                    reco_field = "Unknown"
-                    recommended_skills = []
-                    rec_course = []
+                    
 
                     skills_list = resume_data.get("skills", [])
 
