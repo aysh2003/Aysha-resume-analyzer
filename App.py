@@ -203,7 +203,7 @@ def run():
 
         # Optional confirmation message
             if resume_data:
-                st.success("Resume parsed successfully!")
+                      st.success("Resume parsed successfully!")
 
 # display the parsed info
               
