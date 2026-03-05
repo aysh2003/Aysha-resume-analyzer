@@ -433,16 +433,12 @@ def run():
 
                 }).execute()
 
-                st.subheader("Insert Response")
-                st.write(res)
-
+                
     # ===============================
     # Fetch All Resumes
     # ===============================
-                data = supabase.table("resumes").select("*").execute()
+                st.success("Resume analysis saved successfully!")
 
-                st.subheader("Fetch All Resumes")
-                st.write(data)
     else:
         
     ## Admin Side Without Database
