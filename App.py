@@ -486,6 +486,7 @@ def run():
                             st.balloons()
                         # After resume scoring and before admin section
                         # Insert into Supabase and capture the response
+                        # Insert into Supabase and capture the response
                         res = supabase.table("resumes").insert({
                              "name": resume_data.get("name", ""),
                              "email": resume_data.get("email", ""),
@@ -499,11 +500,13 @@ def run():
                              "recommended_courses": "; ".join(rec_course)
                         }).execute()
 
-# Display response from Supabase
+# Debug: show what Supabase returns after insert
+                        st.subheader("Insert Response")
                         st.write(res)
 
-# Debug: immediately fetch all resumes to see if insert worked
+# Immediately fetch all resumes to see if the insert worked
                         data = supabase.table("resumes").select("*").execute()
+                        st.subheader("Fetch All Resumes")
                         st.write(data)
     else:
         
