@@ -42,18 +42,39 @@ def simple_parse(text):
     data["phone"] = phones[0] if phones else ""
 
     # name guess — take the first non‑empty line
+    # better name detection
     lines = [l.strip() for l in text.split("\n") if l.strip()]
-    data["name"] = lines[0] if lines else ""
+
+    name = ""
+    for line in lines[:10]:
+        if len(line.split()) <= 3 and not any(char.isdigit() for char in line):
+            name = line
+            break
+
+    data["name"] = name
 
     # skill matching (basic list)
-    key_skills = ["python","javascript","java","sql","html","css",
-                  "machine learning","deep learning","react",
-                  "django","node","flask"]
+    # skill matching (improved list)
+    key_skills = [
+        "python","java","c","c++","sql","html","css","javascript",
+        "machine learning","deep learning","data science",
+        "tensorflow","keras","pytorch","scikit-learn",
+        "pandas","numpy","matplotlib",
+        "react","angular","node js","django","flask",
+        "mongodb","mysql","postgresql",
+        "git","github",
+        "docker","kubernetes",
+        "aws","azure","gcp",
+        "power bi","tableau","excel"
+    ]
+
     found_skills = []
     lowered = text.lower()
+
     for skill in key_skills:
         if skill.lower() in lowered:
             found_skills.append(skill)
+
     data["skills"] = list(set(found_skills))
 
     return data
@@ -203,7 +224,7 @@ def run():
             st.text("Name: " + resume_data.get("name", "Not found"))
             st.text("Email: " + resume_data.get("email", "Not found"))
             st.text("Phone: " + resume_data.get("phone", "Not found"))
-            st.text("Skills: " + ", ".join(resume_data.get("skills", [])))
+            st.write("Skills:", resume_data.get("skills", []))
 
         # Optional confirmation message
             if resume_data:
@@ -243,7 +264,11 @@ def run():
                     )
 
         # Skill categories
-                    ds_keyword = ['tensorflow','keras','pytorch','machine learning','deep learning','flask','streamlit']
+                    ds_keyword = [
+                        'python','machine learning','deep learning','data science',
+                        'tensorflow','keras','pytorch','scikit-learn',
+                        'pandas','numpy','matplotlib','streamlit'
+                    ]
                     web_keyword = ['react','django','node js','php','laravel','magento','wordpress','javascript','angular js','c#']
                     android_keyword = ['android','android development','flutter','kotlin','xml','kivy']
                     ios_keyword = ['ios','ios development','swift','cocoa','xcode']
